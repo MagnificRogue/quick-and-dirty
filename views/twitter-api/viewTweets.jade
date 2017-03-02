@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  for tweet in tweets 
+    blockquote.twitter-tweet
+      p=tweet.text
+      footer=tweet.user.name
+    pre=JSON.stringify(tweet, null, 3) 
+    hr

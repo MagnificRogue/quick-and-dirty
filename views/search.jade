@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p What are you looking for?
+  
+  form(action='/search', method='post')
+    div.form-group
+      label(for="query") Query
+      input(type="text", required="required", placeholder="What are you looking for?" name="query").form-control
+      
+    div.form-group
+      label(for="save") Save Results?
+      input(type="checkbox", name="save").form-control
+
+    button(type='submit', class='btn btn-info') Search 
