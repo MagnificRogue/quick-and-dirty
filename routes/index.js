@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Social Sense API Query System',
                         providers:[
                           {name: 'Search', url:'/search'},
+                          {name: 'Search History', url:'/search/history'},
                           {name: 'Twitter', url:'/twitter'},
                           {name: 'Reddit', url:'/reddit'},         
                           {name: 'Youtube', url:'/youtube'} 
@@ -59,6 +60,23 @@ router.post('/search', (req, res, next) => {
   promises.push(youtubeSearchPromise);
 
   when.all(promises).then(function(){
+
+      if(req.body.save) {
+        var url = config.mongo.url; 
+        MongoClient.connect(url, (err, db) => {
+          var collection = db.collection(config.mongo.collection);
+          var time = + new Date();
+          collection.insert({time: time, data: toReturn}, (err, result) => {
+            if(err){
+              console.log('Insertion error: ', err);
+            }
+            
+            console.log(result);
+
+          });
+        });
+      }
+
       res.setHeader('Content-Type','application/json');
       res.send(JSON.stringify(toReturn)); 
   });
@@ -174,10 +192,37 @@ var getYoutubeSearch = function(hostname, query){
 
 
 
+router.get('/search/history', (req, res, next) => {
 
+  var url = config.mongo.url; 
+  MongoClient.connect(url, (err, db) => {
+    var collection = db.collection(config.mongo.collection);
+  
+    collection.find({}).toArray((err, result) => {
+      if(err) {
+        console.log('Finding Error: ', err); 
+      }
 
+      console.log(result);
+      res.render('searchHistory', {history: result, title:'Search History'}); 
+    });
+  });
+});
 
+router.get('/search/history/:id', (req, res, next) => {
 
+  var url = config.mongo.url; 
+  MongoClient.connect(url, (err, db) => {
+    var collection = db.collection(config.mongo.collection);
+
+    collection.find({time: parseInt(req.params.id)}).toArray((err, result) => {
+      if(err) {
+        console.log('Finding Error: ', err); 
+      }
+      res.send((result[0].data));
+    });
+  });
+});
 
 
 module.exports = router;

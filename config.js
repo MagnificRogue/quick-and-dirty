@@ -15,5 +15,6 @@ config.youtube = {};
 
 config.mongo = {};
   config.mongo.url = process.env.MONGO_URL || '';
+  config.mongo.collection = process.env.MONGO_COLLECTION || '';
 
 module.exports = config;
