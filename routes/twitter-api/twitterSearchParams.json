@@ -1,0 +1,37 @@
+{
+  "q": {
+    "type": "text",
+    "required": true,
+    "about": "A UTF-8, URL-encoded search query of 500 characters maximum, including operators.",
+    "example": "@noradio"
+  },
+
+  "geocode": {
+    "type": "text",
+    "required": false,
+    "about": "Returns tweets by users located within a given radius of the given latitude/longitude.",
+    "example": "37.781157,-122.398720,1mi OR 37.781157,-122.398720,1km"
+  },
+  
+  "lang": {
+    "type": "text",
+    "required": false,
+    "about": "Restricts tweets to the given language.",
+    "example": "en"
+  },
+
+  "count": {
+    "type": "number",
+    "required": false,
+    "about": "The number of tweets to return per page, up to a maximum of 100.",
+    "example": "100"
+  },
+
+  "until": {
+    "type": "text",
+    "required": false,
+    "about": "Returns tweets created before the given date. the search index has a 7-day limit.",
+    "example": "2015-07-19"
+  }
+}
+

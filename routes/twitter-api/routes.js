@@ -2,110 +2,88 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var config = require('../../config');
+var DB = require('../../bin/connectDB');
 
-
-/* GET home page. */
+/* home page. */
 router.get('/', function(req, res, next) {
   res.render('twitter-api/index', { title: 'Twitter API Viewer' ,
-                                    endpoints: ['twitter/search/tweets', 'twitter/statuses/user_timeline']
+                                    endpoints: ['twitter/search', 'twitter/user_timeline','twitter/result']
                                     });
 });
 
-router.get('/search/tweets', function(req, res, next){
-  var requestParams = require('./searchTweetsParams'); 
-  res.render('twitter-api/searchTweets', {title: 'Search Tweets', params: requestParams});
+/* search tweets by keyword */
+router.get('/search', function(req, res, next){
+  var requestParams = require('./twitterSearchParams'); 
+  res.render('twitter-api/searchTweets', {title: 'keyword Search', params: requestParams});
 });
 
-router.get('/statuses/user_timeline', function(req, res, next){
-  var requestParams = require('./userTimelineParams');
-  res.render('twitter-api/usertimeline',{title: 'User Timeline', params: requestParams});
-})
+router.post('/search', function(req, res, next){
+	//console.log(req.body);
+	twtSearch(req);
+});
 
-function getAccessToken(callback){
-
-  var authorization = {
-    consumerKey : config.twitter.consumer_key,
-    consumerSecret : config.twitter.consumer_secret,
-    bearerTokenCredentials : config.twitter.consumer_key + ':' + config.twitter.consumer_secret,
-  }
-
-  var encoding = new Buffer(authorization.bearerTokenCredentials).toString('base64');
-
-
-  var options = {
-    method: 'POST',
-    uri:'https://api.twitter.com/oauth2/token',
-    headers: {
-      "Content-Type": 'application/x-www-form-urlencoded;charset=UTF-8',
-      "Authorization": 'Basic ' + encoding 
-    },
-    body: 'grant_type=client_credentials'
-  };
-
-  request(options, function(error, response, body){
-    if(error) {
-      callback(error);
-    }
-
-    if(response && response.statusCode == 200) {
-      callback(response);
-    } 
-  });
-
+var twtSearch = function(req){
+	var Twitter = require('twitter');
+		var client = new Twitter({
+			consumer_key:config.twitter.consumer_key,
+			consumer_secret:config.twitter.consumer_secret,
+			access_token_key:config.twitter.access_token_key,
+			access_token_secret:config.twitter.access_token_secret
+		})
+		client.get('search/tweets',req.body,function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			DB.removeJson('twitter');
+			DB.storeJson('twitter',tweets.statuses);
+			// connect to a mongo db a dump the return json into it;
+		});
 }
 
 
-function getTweets(uri, accessToken, query, callback){
-  var options = {
-    method: 'GET',
-    uri: uri,
-    headers: {
-      'Authorization': 'Bearer ' + accessToken 
-    }
-  };
+/* user_timeline */
+router.get('/user_timeline',function(req, res, next){
+  var requestParams = require('./userTimelineParams'); 
+  res.render('twitter-api/userTimeline', {title: 'Render User Timeline', params: requestParams});
+});
 
-  for( var key in query){
-    if(query.hasOwnProperty(key) && query[key]){
-      //check to see if we have to put & for additional parameters, kind've sloppy
-        
-        var value = query[key] !== 'on' ? query[key] : 'true';
+router.post('/user_timeline', function(req, res, next){
+    //console.log(req.body);
+	twtTimeline(req);
+});
 
-        options.uri +=  key + "=" + encodeURIComponent(value) + '&'; 
-    }
-  }
-
-
-  request(options, function(error, response, body){
-
-    if(error) {
-      callback(error);
-    }
-    
-    if(response) {
-      callback(response); 
-    }
-  });
-
-
+var twtTimeline = function(req){
+	var Twitter = require('twitter');
+		var client = new Twitter({
+			consumer_key:config.twitter.consumer_key,
+			consumer_secret:config.twitter.consumer_secret,
+			access_token_key:config.twitter.access_token_key,
+			access_token_secret:config.twitter.access_token_secret
+		})
+		client.get('statuses/user_timeline',req.body, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			DB.removeJson('twitter');
+			DB.storeJson('twitter',tweets);
+			// connect to a mongo db a dump the return json into it;
+		});
 }
 
-
-router.post('/search/tweets', function(req, res, next){
-  getAccessToken(function(response){
-    getTweets('https://api.twitter.com/1.1/search/tweets.json?', JSON.parse(response.body).access_token, req.body, function(tweets){
-      res.render('twitter-api/viewTweets', {'tweets': JSON.parse(tweets.body).statuses});
-    });
-  });
+/* present data */
+router.get('/result',function(req,res,next){
+	var MongoClient = require('mongodb').MongoClient, assert = require('assert');
+	var url = config.mongo.url;
+	MongoClient.connect(url, function (err, db) {
+		if (err) {
+					console.log('Unable to connect to the mongoDB server. Error:', err);
+		} else {
+					console.log('connected to fetch data');
+					db.collection('twitter', function(err, collection1) {
+						collection1.find().toArray(function(err, twts) {
+							res.render('twitter-api/viewResults', {'twitter':twts});
+							db.close();
+							});
+						});
+				}
+	});
 });
-
-router.post('/statuses/user_timeline', function(req, res, next){
-  getAccessToken(function(response){
-    getTweets('https://api.twitter.com/1.1/statuses/user_timeline.json?', JSON.parse(response.body).access_token, req.body, function(tweets){
-      res.render('twitter-api/viewTweets', {'tweets': JSON.parse(tweets.body).statuses});       
-    });
-  });
-});
-
 
 
 module.exports = router;

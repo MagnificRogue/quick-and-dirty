@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+	h1 TWITTER DATA
+	for data in twitter
+		blockquote.twitter
+			p=data.text
+			footer=data.id
+		pre=JSON.stringify(data, null, 3) 
+		hr
+	

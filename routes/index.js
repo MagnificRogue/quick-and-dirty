@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
                         providers:[
                           {name: 'Search', url:'/search'},
                           {name: 'Twitter', url:'/twitter'},
+					      {name: 'Facebook', url:'/facebook'},
                           {name: 'Reddit', url:'/reddit'},         
                           {name: 'Youtube', url:'/youtube'} 
                         ]
@@ -26,6 +27,7 @@ router.get('/search', (req, res, next) => {
 });
 
 router.post('/search', (req, res, next) => {
+	console.log(req.body.query);
   if(!req.body.query){
     res.statusCode = 400;
     res.send(JSON.stringify({error: 'Parameter $query is required'}));

@@ -6,12 +6,12 @@ var url = require('url');
 
 const snoowrap = require('snoowrap');
 
-const r = new snoowrap({
+/*const r = new snoowrap({
   userAgent: config.reddit.userAgent, 
   clientId: config.reddit.client_id, 
   clientSecret: config.reddit.client_secret,
   refreshToken: config.reddit.refreshToken
-});
+});*/
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

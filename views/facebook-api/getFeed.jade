@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+	h1.col-xs-8.col-xs-offset-2=title 
+
+	div.col-xs-8.col-xs-offset-2
+		form(action='/facebook/feed', method='post')
+			label Type in an known facebook page id 
+			input(type="number", name='id', required="true", placeholder='123456').form-control
+			//blockquote #{val.about}
+
+			button(type='submit', class='btn btn-info') Submit

@@ -1,3 +1,5 @@
+// required libraries
+require('dotenv').config();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var facebookApiCalls = require('./routes/facebook-api/routes');
 var twitterApiCalls = require('./routes/twitter-api/routes'); 
 var redditApiCalls = require('./routes/reddit-api/routes');
 var youtubeApiCalls = require('./routes/youtube-api/routes');
@@ -24,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/facebook',facebookApiCalls);
 app.use('/twitter', twitterApiCalls);
 app.use('/reddit',redditApiCalls);
 app.use('/youtube',youtubeApiCalls);
