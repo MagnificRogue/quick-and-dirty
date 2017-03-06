@@ -1,0 +1,23 @@
+{
+  "user_id": {
+    "type": "number",
+    "required": true,
+    "about": "The ID of the user for whom to return results for",
+    "example": "12345"
+  },
+
+  "screen_name": {
+    "type": "text",
+    "required": true,
+    "about": "The screen name of the user for whom to return results for.",
+    "example": "noradio"
+  },
+
+  "count": {
+    "type": "number",
+    "required": false,
+    "about": "Specifies the number of tweets to try and retrieve, up to a maximum of 200 per distinct request. The value of count is best thought of as a limit to the number of tweets to return because suspended or deleted content is removed after the count has been applied. We include retweets in the count, even if include_rts is not supplied. It is recommended you always send include_rts=1 when using this API method.",
+    "example": "" 
+  }
+  
+}
