@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  each query in history 
+    h2
+      a(href="/search/history/" + query.time) #{query.time}
+    br

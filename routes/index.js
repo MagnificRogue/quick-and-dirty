@@ -7,13 +7,12 @@ var when = require('when');
 var config = require('../config');
 var MongoClient = require('mongodb').MongoClient;
 
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Social Sense API Query System',
                         providers:[
                           {name: 'Search', url:'/search'},
+						  {name: 'Search History', url:'/search/history'},
                           {name: 'Twitter', url:'/twitter'},
 					      {name: 'Facebook', url:'/facebook'},
                           {name: 'Reddit', url:'/reddit'},         
@@ -27,7 +26,7 @@ router.get('/search', (req, res, next) => {
 });
 
 router.post('/search', (req, res, next) => {
-	console.log(req.body.query);
+	//console.log(req.body.query);
   if(!req.body.query){
     res.statusCode = 400;
     res.send(JSON.stringify({error: 'Parameter $query is required'}));
@@ -36,11 +35,13 @@ router.post('/search', (req, res, next) => {
 
   var promises = [];
   var toReturn = {
+	twitter:{},
+	facebook:{},
     reddit: {},
     youtube: {}
   };
 
-  var subredditsPromise = getSubreddits(req.headers.host, req.body.query).then(function(data){
+  /*var subredditsPromise = getSubreddits(req.headers.host, req.body.query).then(function(data){
     toReturn.reddit.subreddits = JSON.parse(data);
   });
   promises.push(subredditsPromise);
@@ -58,16 +59,40 @@ router.post('/search', (req, res, next) => {
   var youtubeSearchPromise = getYoutubeSearch(req.headers.host, req.body.query).then(function(data){
     toReturn.youtube = JSON.parse(data); 
   });
-  promises.push(youtubeSearchPromise);
+  promises.push(youtubeSearchPromise);*/
+  
+  var twitterSearchPromise = getTwitterSearch(req.headers.host, req.body.query).then(function(data){
+	  toReturn.twitter = JSON.parse(data);
+  });
+  promises.push(twitterSearchPromise);
+  
+  var facebookSearchPromise = getFacebookSearch(req.headers.host, req.body.query).then(function(data){
+	  toReturn.facebook = JSON.parse(data);
+  });
+  promises.push(facebookSearchPromise);
 
   when.all(promises).then(function(){
+	  
+	  if (req.body.save){
+		  var url = config.mongo.url;
+		  MongoClient.connect(url,(err,db)=>{
+			  var collection = db.collection(config.mongo.collection);
+			  var time = + new Date();
+			  collection.insert({time:time, data:toReturn},(err,result)=>{
+				  if(err){
+					  console.log('Insertion error:', err);
+				  }
+				  console.log(result);
+			  });
+		  });
+	  }
       res.setHeader('Content-Type','application/json');
       res.send(JSON.stringify(toReturn)); 
   });
 
 });
 
-var getSubreddits = function(hostname, query){
+/*var getSubreddits = function(hostname, query){
   var promise = new Promise((resolve, reject) => {
     var options = {
       method: 'GET',
@@ -172,14 +197,79 @@ var getYoutubeSearch = function(hostname, query){
     
   });
   return promise;
+}*/
+
+var getTwitterSearch = function(hostname, query){
+	var promise = new Promise((resolve, reject) => {
+		var options = {
+			method: 'GET',
+			uri: 'http://' + hostname + '/twitter/search?query=' + query,
+			headers:{
+				"Content-Type": 'application/x-www-form-urlencoded;charset=UTF-8',
+			},
+		};
+		
+		request(options, function(error, response, body){
+			if(error){
+				reject(error);
+			}
+			if(response){
+				resolve(response.body);
+			}
+		});
+	});
+	return promise;
 }
 
+var getFacebookSearch = function(hostname,query){
+	var promise = new Promise((resolve,reject) => {
+		var options = {
+			method: 'GET',
+			uri: 'http://' + hostname + '/facebook/search?query=' + query,
+			headers:{
+				"Content-Type": 'application/x-www-form-urlencoded;charset=UTF-8',
+			},
+		};
+		
+		request(options,function(error,response,body){
+			if(error){
+				reject(error);
+			}
+			if(response){
+				resolve(response.body);
+			}
+		});
+	});
+	return promise;
+}
 
+router.get('/search/history',(req,res,next)=>{
+	var url = config.mongo.url;
+	MongoClient.connect(url,(err,db)=>{
+		var collection = db.collection(config.mongo.collection);
+		collection.find({}).toArray((err,result)=>{
+			if(err){
+				console.log('Finding Error:',err);
+			}
+		console.log(result);
+		res.render('searchHistory',{history:result,title:'Search History'});
+		});
+	});
+});
 
-
-
-
-
+router.get('/search/history/:id',(req,res,next)=>{
+	var url = config.mongo.url;
+	MongoClient.connect(url,(err,db)=>{
+		var collection = db.collection(config.mongo.collection);
+		
+		collection.find({time:parseInt(req.params.id)}).toArray((err,result) =>{
+			if(err){
+				console.log('Finding Error: ', err);
+			}
+			res.send((result[0].data));
+		});
+	});
+});
 
 
 module.exports = router;
