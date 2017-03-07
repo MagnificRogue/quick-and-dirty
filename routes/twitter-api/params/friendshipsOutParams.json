@@ -1,0 +1,13 @@
+{
+	"cursor":{
+		"type":"text",
+		"required":"false",
+		"about":"The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. See [node:10362, title=”Using cursors to navigate collections”] for more information.",
+		"example":"12893764510938"
+	},
+	"stringify_ids":{
+		"type":"checkbox",
+		"required":"false",
+		"about":"Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead. Read more about Twitter IDs ."
+	}
+}

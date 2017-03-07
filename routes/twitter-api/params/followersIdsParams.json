@@ -1,0 +1,31 @@
+{
+	"user_id":{
+		"type":"number",
+		"required":"false",
+		"about":"The ID of the user for whom to return results for.",
+		"example":"20"
+	},
+	"screen_name":{
+		"type":"text",
+		"required":"true",
+		"about":"The screen name of the user for whom to return results for.",
+		"example":"twitterdev"
+	},
+	"cursor":{
+		"type":"text",
+		"required":"false",
+		"about":"A string identifying the segment of the current result set to retrieve. Values for this parameter are yielded in the cursors node attached to response objects. Usage of the count parameter affects cursoring.",
+		"example":"BXb2synCEAE"
+	},
+	"stringify_ids":{
+		"type":"checkbox",
+		"required":"false",
+		"about":"Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead. Read more about Twitter IDs ."
+	},
+	"count":{
+		"type":"number",
+		"required":"false",
+		"about":"Specifies the maximum number of results to include in the response. Specify a count between 1 and 200. A next_cursor value will be provided in the response if additional results are available.",
+		"example":"100"
+	}
+}

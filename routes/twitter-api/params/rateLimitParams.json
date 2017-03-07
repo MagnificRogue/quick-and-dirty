@@ -1,0 +1,8 @@
+{
+	"resources":{
+		"type":"text",
+		"required":"false",
+		"about": "A comma-separated list of resource families you want to know the current rate limit disposition for. For best performance, only specify the resource families pertinent to your application. See API Rate Limiting for more information.",
+		"example":"statuses,friends,trends,help"
+	}
+}

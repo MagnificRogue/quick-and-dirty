@@ -1,0 +1,13 @@
+{
+	"cursor":{
+		"type":"text",
+		"required":"false",
+		"about":"A string identifying the segment of the current result set to retrieve. Values for this parameter are yielded in the cursors node attached to response objects. Usage of the count parameter affects cursoring.",
+		"example":"BXb2synCEAE"
+	},
+	"stringify_ids":{
+		"type":"checkbox",
+		"required":"false",
+		"about":"Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead. Read more about Twitter IDs ."
+	}
+}

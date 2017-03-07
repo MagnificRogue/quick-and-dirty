@@ -1,0 +1,26 @@
+{
+	"id":{
+		"type":"text",
+		"required":"true",
+		"about":"The identifier of the Collection to return results for",
+		"example":"custom-539487832448843776"
+	},
+	"count":{
+		"type":"number",
+		"required":"false",
+		"about": "Specifies the maximum number of results to include in the response. Specify a count between 1 and 200. A next_cursor value will be provided in the response if additional results are available.",
+		"example":"100"
+	},
+	"max_position":{
+		"type":"number",
+		"required":"false",
+		"about":"Returns results with a position value less than or equal to the specified position.",
+		"example":"54321"
+	},
+	"min_position":{
+		"type":"number",
+		"required":"false",
+		"about":"Returns results with a position greater than the specified position.",
+		"example":"12345"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"user_id":{
+		"type":"number",
+		"required":"false",
+		"about":"A comma separated list of user IDs, up to 100 are allowed in a single request.",
+		"example":"783214 6253282"
+	},
+	"screen_name":{
+		"type":"text",
+		"required":"false",
+		"about":"A comma separated list of screen names, up to 100 are allowed in a single request.",
+		"example":"twitterdev twitterapi twitter"
+	}
+}
