@@ -1,0 +1,8 @@
+{
+	"place_id":{
+		"type":"text",
+		"required":true,
+		"about":"A place in the world. These IDs can be retrieved from geo/reverse_geocode.",
+		"example":"df51dec6f4ee2b2c"
+	}
+}

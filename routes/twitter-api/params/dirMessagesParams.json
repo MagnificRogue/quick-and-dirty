@@ -1,30 +1,30 @@
 {
 	"since_id":{
 		"type":"number",
-		"required":"false",
+		"required":false,
 		"about":"Returns results with an ID greater than (that is, more recent than) the specified ID. There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.",
 		"example":"12345"
 	},
 	"max_id":{
 		"type":"number",
-		"required":"false",
+		"required":false,
 		"about":"Returns results with an ID less than (that is, older than) or equal to the specified ID.",
 		"example":"54321"
 	},
 	"count":{
 		"type":"number",
-		"required":"false",
+		"required":false,
 		"about":"Specifies the number of direct messages to try and retrieve, up to a maximum of 200. The value of count is best thought of as a limit to the number of Tweets to return because suspended or deleted content is removed after the count has been applied.",
 		"example":"5"
 	},
 	"include_entities":{
 		"type":"checkbox",
-		"required":"false",
+		"required":false,
 		"about":"The entities node will not be included when set to false."
 	},
 	"skip_status":{
 		"type":"checkbox",
-		"required":"false",
+		"required":false,
 		"about":"When set to either true , t or 1 statuses will not be included in the returned user objects."
 	}
 	

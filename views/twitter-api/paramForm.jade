@@ -9,10 +9,7 @@ block content
       each val, key in params 
         div.form-group
           label(for='key')=key  
-          if (val.required === false)
-            input(type=val.type, name=key, required=val.required, placeholder=val.example).form-control
-          else
-            input(type=val.type, name=key,  placeholder=val.example).form-control
+          input(type=val.type, name=key, required=val.required, placeholder=val.example).form-control
           blockquote #{val.about}
 
       button(type='submit', class='btn btn-info') Submit

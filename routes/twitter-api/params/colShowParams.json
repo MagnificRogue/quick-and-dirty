@@ -1,7 +1,7 @@
 {
 	"id":{
 		"type":"text",
-		"required":"true",
+		"required":true,
 		"about":"The identifier of the Collection to return results for.",
 		"example":"custom-388061495298244609"
 	}

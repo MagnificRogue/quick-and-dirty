@@ -1,0 +1,26 @@
+{
+	"list_id":{
+		"type":"number",
+		"required":true,
+		"about":"The numerical id of the list.",
+		"example":"12345"
+	},
+	"slug":{
+		"type":"number",
+		"required":true,
+		"about":"You can identify a list by its slug instead of its numerical id. If you decide to do so, note that you’ll also have to specify the list owner using the owner_id or owner_screen_name parameters.",
+		"example":"20"
+	},
+	"owner_screen_name":{
+		"type":"text",
+		"required":false,
+		"about":"The screen name of the user who owns the list being requested by a slug.",
+		"example":"noradio"
+	},
+	"owner_id":{
+		"type":"number",
+		"required":false,
+		"about":"The user ID of the user who owns the list being requested by a slug.",
+		"example":"54321"
+	}
+}

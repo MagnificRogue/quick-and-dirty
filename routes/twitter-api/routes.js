@@ -16,7 +16,8 @@ var client = new Twitter({
 /* home page. */
 router.get('/', function(req, res, next) {
   res.render('twitter-api/index', { title: 'Twitter API Viewer' ,
-                                    endpoints: ['twitter/account/settings',				'twitter/account/verify_credentials',
+                                    endpoints: ['twitter/search', 
+												'twitter/account/settings',				'twitter/account/verify_credentials',
 												'twitter/application/rate_limit_status','twitter/blocks/ids',
 												'twitter/blocks/list',					'twitter/collections/entries', 
 												'twitter/collections/list',				'twitter/collections/show',
@@ -26,9 +27,22 @@ router.get('/', function(req, res, next) {
 												'twitter/friends/ids',					'twitter/friends/list',
 												'twitter/friendships/incoming',			'twitter/friendships/lookup',
 												'twitter/friendships/no_retweets/ids',  'twitter/friendships/outgoing',
-												'twitter/friendships/show',
-												'twitter/search', 
-												'twitter/user_timeline',				'twitter/result']
+												'twitter/friendships/show',				'twitter/geo/id/:place_id',
+												'twitter/geo/reverse_geocode',			'twitter/geo/search',
+												'twitter/help/configuration',			'twitter/help/languages',
+												'twitter/help/privacy',					'twitter/help/tos',
+												'twitter/lists/list',					'twitter/lists/members',
+												'twitter/lists/members/show',			'twitter/lists/memberships',
+												'twitter/lists/ownerships',				'twitter/lists/show',
+												'twitter/lists/statuses',				'twitter/lists/subscribers',
+												'twitter/lists/subscribers/show',		'twitter/lists/subscriptions',
+												'twitter/mutes/users/ids',				'twitter/mutes/users/list',
+												'twitter/saved_searches/list',			'twitter/saved_searches/show/:id',
+												'twitter/statuses/home_timeline',		'twitter/statuses/lookup',
+												'twitter/statuses/mentions_timeline',	'twitter/statuses/retweeters/ids',
+												'twitter/statuses/retweets/:id',		'twitter/statuses/retweets_of_me',
+												'twitter/statuses/show/:id',			'twitter/statuses/user_timeline',	
+												'twitter/result']
                                     });
 });
 
@@ -51,6 +65,56 @@ router.get('/search', function(req, res, next){
 /* account/settings */
 router.get('/account/settings',function(req,res,next){
 	client.get('account/settings',{}, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(tweets));
+			//mongoDB
+		});
+});
+
+/* help/configuration */
+router.get('/help/configuration',function(req,res,next){
+	client.get('help/configuration',{}, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(tweets));
+			//mongoDB
+		});
+});
+
+/* help/languages */
+router.get('/help/languages',function(req,res,next){
+	client.get('help/languages',{}, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(tweets));
+			//mongoDB
+		});
+});
+
+/* help/privacy */
+router.get('/help/privacy',function(req,res,next){
+	client.get('help/privacy',{}, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(tweets));
+			//mongoDB
+		});
+});
+
+/* help/tos */
+router.get('/help/tos',function(req,res,next){
+	client.get('help/tos',{}, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(tweets));
+			//mongoDB
+		});
+});
+
+/* saved_searches/list */
+router.get('/saved_searches/list',function(req,res,next){
+	client.get('saved_searches/list',{}, function(error,tweets,response){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
@@ -352,6 +416,369 @@ router.get('/friendships/show',function(req,res,next){
 });
 router.post('/friendships/show',function(req,res,next){
 	twitterPost(req, 'friendships/show').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* geo/id/:place_id (no response)*/
+router.get('/geo/id/:place_id',function(req,res,next){
+	var requestParams = require('./params/geoPlaceIdParams');
+	res.render('twitter-api/paramForm',{title:'Returns all the information about a known place.',
+										url: '/twitter/geo/id/:place_id',
+										params: requestParams});
+});
+router.post('/geo/id/:place_id',function(req,res,next){
+	twitterPost(req, 'geo/id/:place_id').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* geo/reverse_geocode */
+router.get('/geo/reverse_geocode',function(req,res,next){
+	var requestParams = require('./params/geoRcodeParams');
+	res.render('twitter-api/paramForm',{title:'Given a latitude and a longitude, searches for up to 20 places that can be used as a place_id when updating a status.',
+										url: '/twitter/geo/reverse_geocode',
+										params: requestParams});
+});
+router.post('/geo/reverse_geocode',function(req,res,next){
+	twitterPost(req, 'geo/reverse_geocode').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* geo/search */
+router.get('/geo/search',function(req,res,next){
+	var requestParams = require('./params/geoSearchParams');
+	res.render('twitter-api/paramForm',{title:'Search for places that can be attached to a statuses/update.' 
+											  +'Given a latitude and a longitude pair, an IP address, or a name,'+
+											  'this request will return a list of all the valid places that can be' +
+											  'used as the place_id when updating a status.',
+										url: '/twitter/geo/search',
+										params: requestParams});
+});
+router.post('/geo/search',function(req,res,next){
+	twitterPost(req, 'geo/search').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/list (no response)*/
+router.get('/lists/list',function(req,res,next){
+	var requestParams = require('./params/listsListParams');
+	res.render('twitter-api/paramForm',{title:'Returns all lists the authenticating or specified user subscribes to, including their own.',
+										url: '/twitter/lists/list',
+										params: requestParams});
+});
+router.post('/lists/list',function(req,res,next){
+	twitterPost(req, 'lists/list').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/members (no response)*/
+router.get('/lists/members',function(req,res,next){
+	var requestParams = require('./params/listsMembersParams');
+	res.render('twitter-api/paramForm',{title:'Returns the members of the specified list.',
+										url: '/twitter/lists/members',
+										params: requestParams});
+});
+router.post('/lists/members',function(req,res,next){
+	twitterPost(req, 'lists/members').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/members/show (no response)*/
+router.get('/lists/members/show',function(req,res,next){
+	var requestParams = require('./params/listsMembersShowParams');
+	res.render('twitter-api/paramForm',{title:'Check if the specified user is a member of the specified list.',
+										url: '/twitter/lists/members/show',
+										params: requestParams});
+});
+router.post('/lists/members/show',function(req,res,next){
+	twitterPost(req, 'lists/members/show').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/memberships (no response)*/
+router.get('/lists/memberships',function(req,res,next){
+	var requestParams = require('./params/listsMembershipsParams');
+	res.render('twitter-api/paramForm',{title:'Check if the specified user is a member of the specified list.',
+										url: '/twitter/lists/memberships',
+										params: requestParams});
+});
+router.post('/lists/memberships',function(req,res,next){
+	twitterPost(req, 'lists/memberships').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/ownerships (no response)*/
+router.get('/lists/ownerships',function(req,res,next){
+	var requestParams = require('./params/listsOwnershipsParams');
+	res.render('twitter-api/paramForm',{title:'Returns the lists owned by the specified Twitter user.',
+										url: '/twitter/lists/ownerships',
+										params: requestParams});
+});
+router.post('/lists/ownerships',function(req,res,next){
+	twitterPost(req, 'lists/ownerships').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/show (no response)*/
+router.get('/lists/show',function(req,res,next){
+	var requestParams = require('./params/listsShowParams');
+	res.render('twitter-api/paramForm',{title:'Returns the specified list.',
+										url: '/twitter/lists/show',
+										params: requestParams});
+});
+router.post('/lists/show',function(req,res,next){
+	twitterPost(req, 'lists/show').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/statuses (no response)*/
+router.get('/lists/statuses',function(req,res,next){
+	var requestParams = require('./params/listsStatusesParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a timeline of tweets authored by members of the specified list.',
+										url: '/twitter/lists/statuses',
+										params: requestParams});
+});
+router.post('/lists/statuses',function(req,res,next){
+	twitterPost(req, 'lists/statuses').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/subscribers (no response)*/
+router.get('/lists/subscribers',function(req,res,next){
+	var requestParams = require('./params/listsSubscribersParams');
+	res.render('twitter-api/paramForm',{title: 'Returns the subscribers of the specified list. ',
+										url: '/twitter/lists/subscribers',
+										params: requestParams});
+});
+router.post('/lists/subscribers',function(req,res,next){
+	twitterPost(req, 'lists/subscribers').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/subscribers/show (no response)*/
+router.get('/lists/subscribers/show',function(req,res,next){
+	var requestParams = require('./params/subscribersShowParams');
+	res.render('twitter-api/paramForm',{title: 'Check if the specified user is a subscriber of the specified list. Returns the user if they are subscriber.',
+										url: '/twitter/lists/subscribers/show',
+										params: requestParams});
+});
+router.post('/lists/subscribers/show',function(req,res,next){
+	twitterPost(req, 'lists/subscribers/show').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* lists/subscriptions (no response)*/
+router.get('/lists/subscriptions',function(req,res,next){
+	var requestParams = require('./params/subscriptionsParams');
+	res.render('twitter-api/paramForm',{title: 'Obtain a collection of the lists the specified user is subscribed to, 20 lists per page by default. Does not include the user’s own lists.',
+										url: '/twitter/lists/subscriptions',
+										params: requestParams});
+});
+router.post('/lists/subscriptions',function(req,res,next){
+	twitterPost(req, 'lists/subscriptions').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* mutes/users/ids */
+router.get('/mutes/users/ids',function(req,res,next){
+	var requestParams = require('./params/mutesIdsParams');
+	res.render('twitter-api/paramForm',{title: 'Returns an array of numeric user ids the authenticating user has muted.',
+										url: '/twitter/mutes/users/ids',
+										params: requestParams});
+});
+router.post('/mutes/users/ids',function(req,res,next){
+	twitterPost(req, 'mutes/users/ids').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* mutes/users/list */
+router.get('/mutes/users/list',function(req,res,next){
+	var requestParams = require('./params/mutesListParams');
+	res.render('twitter-api/paramForm',{title: 'Returns an array of user objects the authenticating user has muted.',
+										url: '/twitter/mutes/users/list',
+										params: requestParams});
+});
+router.post('/mutes/users/list',function(req,res,next){
+	twitterPost(req, 'mutes/users/list').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* saved_searches/show/:id */
+router.get('/saved_searches/show/:id',function(req,res,next){
+	var requestParams = require('./params/savedSearchesIdParams');
+	res.render('twitter-api/paramForm',{title: 'Retrieve the information for the saved search represented by the given id.',
+										url: '/twitter/saved_searches/show/:id',
+										params: requestParams});
+});
+router.post('/saved_searches/show/:id',function(req,res,next){
+	twitterPost(req, 'saved_searches/show/:id').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/home_timeline */
+router.get('/statuses/home_timeline',function(req,res,next){
+	var requestParams = require('./params/homeTimelineParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow.',
+										url: '/twitter/statuses/home_timeline',
+										params: requestParams});
+});
+router.post('/statuses/home_timeline',function(req,res,next){
+	twitterPost(req, 'statuses/home_timeline').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/lookup */
+router.get('/statuses/lookup',function(req,res,next){
+	var requestParams = require('./params/statusesLookupParams');
+	res.render('twitter-api/paramForm',{title: 'Returns fully-hydrated Tweet objects for up to 100 Tweets per request, as specified by comma-separated values passed to the id parameter.',
+										url: '/twitter/statuses/lookup',
+										params: requestParams});
+});
+router.post('/statuses/lookup',function(req,res,next){
+	twitterPost(req, 'statuses/lookup').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/mentions_timeline */
+router.get('/statuses/mentions_timeline',function(req,res,next){
+	var requestParams = require('./params/statusesMentionsParams');
+	res.render('twitter-api/paramForm',{title: 'Returns the 20 most recent mentions (Tweets containing a users’s @screen_name) for the authenticating user.',
+										url: '/twitter/statuses/mentions_timeline',
+										params: requestParams});
+});
+router.post('/statuses/mentions_timeline',function(req,res,next){
+	twitterPost(req, 'statuses/mentions_timeline').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/retweeters/ids */
+router.get('/statuses/retweeters/ids',function(req,res,next){
+	var requestParams = require('./params/statusesRtIdsParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a collection of up to 100 user IDs belonging to users who have retweeted the Tweet specified by the id parameter.',
+										url: '/twitter/statuses/retweeters/ids',
+										params: requestParams});
+});
+router.post('/statuses/retweeters/ids',function(req,res,next){
+	twitterPost(req, 'statuses/retweeters/ids').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/retweets/:id */
+router.get('/statuses/retweets/:id',function(req,res,next){
+	var requestParams = require('./params/statusesRtIdParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a collection of the 100 most recent retweets of the Tweet specified by the id parameter.',
+										url: '/twitter/statuses/retweets/:id',
+										params: requestParams});
+});
+router.post('/statuses/retweets/:id',function(req,res,next){
+	twitterPost(req, 'statuses/retweets/:id').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/retweets_of_me */
+router.get('/statuses/retweets_of_me',function(req,res,next){
+	var requestParams = require('./params/statusesRtMeParams');
+	res.render('twitter-api/paramForm',{title: 'Returns the most recent Tweets authored by the authenticating user that have been retweeted by others.',
+										url: '/twitter/statuses/retweets_of_me',
+										params: requestParams});
+});
+router.post('/statuses/retweets_of_me',function(req,res,next){
+	twitterPost(req, 'statuses/retweets_of_me').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/show/:id */
+router.get('/statuses/show/:id',function(req,res,next){
+	var requestParams = require('./params/statusesShowParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a single Tweet, specified by the id parameter. The Tweet’s author will also be embedded within the Tweet.',
+										url: '/twitter/statuses/show/:id',
+										params: requestParams});
+});
+router.post('/statuses/show/:id',function(req,res,next){
+	twitterPost(req, 'statuses/show/:id').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		//mongodb?
+	});	
+});
+
+/* statuses/user_timeline */
+router.get('/statuses/user_timeline',function(req,res,next){
+	var requestParams = require('./params/userTimelineParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a collection of the most recent Tweets posted by the user indicated by the screen_name or user_id parameters.',
+										url: '/twitter/statuses/user_timeline',
+										params: requestParams});
+});
+router.post('/statuses/user_timeline',function(req,res,next){
+	twitterPost(req, 'statuses/user_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
 		//mongodb?

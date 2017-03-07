@@ -1,7 +1,7 @@
 {
 	"id":{
 		"type":"number",
-		"required":"true",
+		"required":true,
 		"about":"The ID of the direct message.",
 		"example":"587424932"
 	}

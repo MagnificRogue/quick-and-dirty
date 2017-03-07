@@ -1,0 +1,19 @@
+{
+	"id":{
+		"type":"text",
+		"required":true,
+		"about":"A comma separated list of Tweet IDs, up to 100 are allowed in a single request.",
+		"example":"20,432656548536401920"
+	},
+	"count":{
+		"type":"number",
+		"required":false,
+		"about":"Specifies the number of records to retrieve. Must be less than or equal to 100.",
+		"example":"100"
+	},
+	"trim_user":{
+		"type":"checkbox",
+		"required":false,
+		"about":"When set to either true , t or 1 , each Tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object."
+	}
+}

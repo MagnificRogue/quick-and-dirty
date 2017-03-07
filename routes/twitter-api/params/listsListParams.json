@@ -1,0 +1,19 @@
+{
+	"user_id":{
+		"type":"number",
+		"required":false,
+		"about":"The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name.",
+		"example":"12345"
+	},
+	"screen_name":{
+		"type":"text",
+		"required":true,
+		"about":"The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID",
+		"example":"twitterdev"
+	},
+	"reverse":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Set this to true if you would like owned lists to be returned first. See description above for information on how this parameter works."
+	}
+}

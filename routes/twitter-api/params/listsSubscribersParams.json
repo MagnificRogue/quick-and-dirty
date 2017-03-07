@@ -1,0 +1,48 @@
+{
+	"list_id":{
+		"type":"number",
+		"required":true,
+		"about":"The numerical id of the list.",
+		"example":"12345"
+	},
+	"slug":{
+		"type":"number",
+		"required":true,
+		"about":"You can identify a list by its slug instead of its numerical id. If you decide to do so, note that you’ll also have to specify the list owner using the owner_id or owner_screen_name parameters.",
+		"example":"20"
+	},
+	"owner_screen_name":{
+		"type":"text",
+		"required":false,
+		"about":"The screen name of the user who owns the list being requested by a slug.",
+		"example":"noradio"
+	},
+	"owner_id":{
+		"type":"number",
+		"required":false,
+		"about":"The user ID of the user who owns the list being requested by a slug.",
+		"example":"54321"
+	},
+	"count":{
+		"type":"number",
+		"required":false,
+		"about":"Specifies the number of results to return per page.",
+		"example":"5"
+	},
+	"cursor":{
+		"type":"text",
+		"required":false,
+		"about":"Causes the collection of list members to be broken into “pages” of consistent sizes (specified by the count parameter). If no cursor is provided, a value of -1 will be assumed, which is the first “page.”The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. See Using cursors to navigate collections for more information.",
+		"example":"12893764510938"
+	},
+	"include_entities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Entities are ON by default in API 1.1, each tweet includes a node called “entities”. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags. You can omit entities from the result by using include_entities=false."
+	},
+	"skip_status":{
+		"type":"checkbox",
+		"required":false,
+		"about":"When set to either true , t or 1 , statuses will not be included in the returned user objects. If set to any other value, statuses will be included."
+	}	
+}

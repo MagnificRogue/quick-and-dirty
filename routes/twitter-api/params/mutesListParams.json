@@ -5,9 +5,14 @@
 		"about":"A string identifying the segment of the current result set to retrieve. Values for this parameter are yielded in the cursors node attached to response objects. Usage of the count parameter affects cursoring.",
 		"example":"BXb2synCEAE"
 	},
-	"stringify_ids":{
+	"skip_status":{
 		"type":"checkbox",
 		"required":false,
-		"about":"Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead. Read more about Twitter IDs ."
+		"about":"When set to either true , t or 1 , statuses will not be included in the returned user objects. If set to any other value, statuses will be included."
+	},
+	"include_entities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The entities node will not be included when set to false."
 	}
 }

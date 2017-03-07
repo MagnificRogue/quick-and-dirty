@@ -1,0 +1,23 @@
+{
+	"id":{
+		"type":"text",
+		"required":true,
+		"about":"A comma separated list of Tweet IDs, up to 100 are allowed in a single request.",
+		"example":"20,432656548536401920"
+	},
+	"include_entities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The entities node will not be included when set to false."
+	},
+	"trim_user":{
+		"type":"checkbox",
+		"required":false,
+		"about":"When set to either true , t or 1 , each Tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object."
+	},
+	"map":{
+		"type":"checkbox",
+		"required":false,
+		"about":"When using the map parameter, Tweets that do not exist or cannot be viewed by the current user will still have their key represented but with an explicitly null value paired with it"
+	}
+}

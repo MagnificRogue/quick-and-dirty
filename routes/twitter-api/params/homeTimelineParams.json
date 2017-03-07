@@ -1,16 +1,4 @@
 {
-	"user_id":{
-		"type":"number",
-		"required":false,
-		"about":"The ID of the user for whom to return results for.",
-		"example":"20"
-	},
-	"screen_name":{
-		"type":"text",
-		"required":true,
-		"about":"The screen name of the user for whom to return results for.",
-		"example":"twitterdev"
-	},
 	"count":{
 		"type":"number",
 		"required":false,
@@ -28,6 +16,16 @@
 		"required":false,
 		"about":"Returns results with an ID less than (that is, older than) or equal to the specified ID.",
 		"example":"54321"
+	},
+	"trim_user":{
+		"type":"checkbox",
+		"required":false,
+		"about":"When set to either true , t or 1 , each Tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object."
+	},
+	"exclude_replies":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Tweets — this is because the count parameter retrieves that many Tweets before filtering out retweets and replies."
 	},
 	"include_entities":{
 		"type":"checkbox",
