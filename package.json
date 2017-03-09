@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+	"start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -17,7 +17,8 @@
     "serve-favicon": "^2.3.2",
 	"twitter":"^1.7.0",
 	"fb":"1.1.1",
-	"mongodb":"2.2.24"
+	"mongodb":"2.2.24",
+	"nodemon":"1.11.0"
   },
   "main": "app.js",
   "author": "",
