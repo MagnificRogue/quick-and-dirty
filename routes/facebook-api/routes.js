@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 												'facebook/Page-Label',						'facebook/Payment',
 												'facebook/Photo',	'facebook/Place',		'facebook/Place-Tag',
 												'facebook/Place-Topic',						'facebook/Post',
-												'facebook/Promotion-Info'					'facebook/Request',
+												'facebook/Promotion-Info',					'facebook/Request',
 												'facebook/Saved-Message-Response', 			'facebook/Test-User',
 												'facebook/Thread',	'facebook/User',		'facebook/User-Context',
 												'facebook/Video',	'facebook/Video-Copyright',
@@ -1362,7 +1362,7 @@ router.get('/Thread',function(req,res,next){
 							params: requestParams});
 });
 router.post('/Thread',function(req,res,next){
-	FB.api(req.body['trhead-id'],function(fb){
+	FB.api(req.body['thread-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
 		//mongodb?
@@ -1559,7 +1559,7 @@ var fbAddEdges = function(base,edge){
 	var promise = new Promise((resolve,reject) => {
 		console.log(base + '/'+ edge);
 		FB.api(base + '/'+ edge, function(fb){
-				resolve(fb);
+				resolve({key:edge,value:fb});
 			});
 		});
 	return promise;

@@ -9,5 +9,5 @@
 		"type":"checkbox",
 		"required":false,
 		"about":"Users that are associated with this label."
-	},
+	}
 }

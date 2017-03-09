@@ -1,6 +1,6 @@
 {
 	"user-id":{
-		"type":"number",
+		"type":"text",
 		"required":true,
 		"about":"",
 		"example":"282332523"
@@ -24,13 +24,13 @@
 		"type":"checkbox",
 		"required":false,
 		"about":"The advertising accounts to which this person has access."
-		},
+	},
 	"adcontracts":{
 		"type":"checkbox",
 		"required":false,
 		"about":"The person's ad contracts."
-		},
-	"adnetworkanalytics"{
+	},
+	"adnetworkanalytics":{
 		"type":"checkbox",
 		"required":false,
 		"about":"Insights data for the person's Audience Network apps."
@@ -200,7 +200,6 @@
 		"required":false,
 		"about":"Video broadcasts from this person."
 		},
-	
 	"videos":{
 		"type":"checkbox",
 		"required":false,
