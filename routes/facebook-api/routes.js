@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var DB = require('../../bin/connectDB');
 var url = require('url');
 var config = require('../../config');
 var FB = require('fb');
 var Promise = require('promise');
 var when = require('when');
+var MongoClient = require('mongodb').MongoClient;
 
 FB.options({version:'v2.8'});
 FB.setAccessToken(config.fb.access_token); //token need to renew every 60 days!
@@ -193,7 +193,7 @@ router.post('/Achievement',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -208,7 +208,7 @@ router.post('/Achievement-Type',function(req,res,next){
 	FB.api(req.body['achievement-type-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -243,7 +243,7 @@ router.post('/ALbum',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -258,7 +258,7 @@ router.post('/Analytics',function(req,res,next){
 	FB.api(req.body['analytics-app-events-export-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -273,7 +273,7 @@ router.post('/App-Link-Host',function(req,res,next){
 	FB.api(req.body['app-link-host-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -288,7 +288,7 @@ router.post('/App-Request',function(req,res,next){
 	FB.api(req.body['app-request-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -323,7 +323,7 @@ router.post('/Application',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -358,7 +358,7 @@ router.post('/Application-Context',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -394,7 +394,7 @@ router.post('/Comment',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -429,7 +429,7 @@ router.post('/Conversation',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -444,7 +444,7 @@ router.post('/Debug-Token',function(req,res,next){
 	FB.api('debug_token?input_token='+ req.body['input-token'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -459,7 +459,7 @@ router.post('/Doc',function(req,res,next){
 	FB.api(req.body['doc-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -475,7 +475,7 @@ router.post('/Domain',function(req,res,next){
 	FB.api(req.body['domain-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -490,7 +490,7 @@ router.post('/Education-Experience',function(req,res,next){
 	FB.api(req.body['education-experience-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -525,7 +525,7 @@ router.post('/Event',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -541,7 +541,7 @@ router.post('/Friend-List',function(req,res,next){
 	FB.api(req.body['friend-list-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -576,7 +576,7 @@ router.post('/Group',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -591,7 +591,7 @@ router.post('/Group-Doc',function(req,res,next){
 	FB.api(req.body['group-doc-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -606,7 +606,7 @@ router.post('/Instagram-Comment',function(req,res,next){
 	FB.api(req.body['instagram-comment-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -641,7 +641,7 @@ router.post('/Instagram-User',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -676,7 +676,7 @@ router.post('/Life-Event',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -711,7 +711,7 @@ router.post('/Link',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -746,7 +746,7 @@ router.post('/Live-Video',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -761,7 +761,7 @@ router.post('/Mailing-Address',function(req,res,next){
 	FB.api(req.body['mailing-address-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -776,7 +776,7 @@ router.post('/Media-Fingerprint',function(req,res,next){
 	FB.api(req.body['media-fingerprint-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -811,7 +811,7 @@ router.post('/Message',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -846,7 +846,7 @@ router.post('/Milestone',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -881,7 +881,7 @@ router.post('/Native-Offer',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -896,7 +896,7 @@ router.post('/Notification',function(req,res,next){
 	FB.api(req.body['notification-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -911,7 +911,7 @@ router.post('/Open-Graph-Action-Type',function(req,res,next){
 	FB.api(req.body['open-graph-action-type-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -946,7 +946,7 @@ router.post('/Open-Graph-Context',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -961,7 +961,7 @@ router.post('/Open-Graph-Object-Type',function(req,res,next){
 	FB.api(req.body['open-graph-object-type-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -996,7 +996,7 @@ router.post('/Page',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1011,7 +1011,7 @@ router.post('/Page-Admin-Note',function(req,res,next){
 	FB.api(req.body['page-admin-note-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1026,7 +1026,7 @@ router.post('/Page-Call-To-Action',function(req,res,next){
 	FB.api(req.body['page-call-to-action-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1061,7 +1061,7 @@ router.post('/Page-Label',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1096,7 +1096,7 @@ router.post('/Payment',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1131,7 +1131,7 @@ router.post('/Photo',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1146,7 +1146,7 @@ router.post('/Place',function(req,res,next){
 	FB.api(req.body['place-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1161,7 +1161,7 @@ router.post('/Place-Tag',function(req,res,next){
 	FB.api(req.body['place-tag-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1176,7 +1176,7 @@ router.post('/Place-Topic',function(req,res,next){
 	FB.api(req.body['place-topic-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1211,7 +1211,7 @@ router.post('/Post',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1226,7 +1226,7 @@ router.post('/Promotion-Info',function(req,res,next){
 	FB.api(req.body['promotion-info-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1241,7 +1241,7 @@ router.post('/Request',function(req,res,next){
 	FB.api(req.body['request-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1276,7 +1276,7 @@ router.post('/Saved-Message-Response',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1313,7 +1313,7 @@ router.post('/Status',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1348,7 +1348,7 @@ router.post('/Test-User',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1365,7 +1365,7 @@ router.post('/Thread',function(req,res,next){
 	FB.api(req.body['thread-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1400,7 +1400,7 @@ router.post('/User',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1435,7 +1435,7 @@ router.post('/User-Context',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1470,7 +1470,7 @@ router.post('/Video',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1485,7 +1485,7 @@ router.post('/Video-Copyright',function(req,res,next){
 	FB.api(req.body['video-copyright-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1500,7 +1500,7 @@ router.post('/Video-Copyright-Rule',function(req,res,next){
 	FB.api(req.body['video-copyright-rule-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		//mongodb?
+		mongoStore(fb);
 	});	
 });
 
@@ -1535,7 +1535,7 @@ router.post('/Video-List',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1565,7 +1565,7 @@ router.post('/SP-Search',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		//mongoDB
+		mongoStore(fbData);
 	});
 });
 
@@ -1578,11 +1578,25 @@ router.get('/Work-Experience',function(req,res,next){
 });
 router.post('/Work-Experience',function(req,res,next){
 	FB.api(req.body['work-experience-id'],function(fb){
-			res.setHeader('Content-Type','application/json');
-			res.send(JSON.stringify(fb));
-		//mongodb?
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fb));
+		mongoStore(fb);
 	});	
 });
+
+/* mongoDB store the data*/
+var mongoStore = function(data){
+	MongoClient.connect(config.mongo.url,(err,db)=>{
+		var collection = db.collection(config.mongo.collection);
+		var time = + new Date();
+		collection.insert({time:time, data:data},(err,result)=>{
+		if(err){
+				console.log('Insertion error:', err);
+				}
+			console.log(result);
+		});
+	});
+}
 
 /* add edges using promise library */
 var fbAddEdges = function(base,edge){
