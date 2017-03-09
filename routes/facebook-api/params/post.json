@@ -1,0 +1,33 @@
+{
+	"post-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights for this post (only for Pages)."
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who like this post."
+		},
+	"reactions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who have reacted to this post."
+	},
+	"sharedposts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Shares of this post."
+		},
+	"attachments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All media attachments associated with this post."
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"status-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who like this status."
+		},
+	"reactions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who have reacted to this status."
+	},
+	"sharedposts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Shares of this status."
+		},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Comments on this status."
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"app-link-host-id":{
+		"type":"text",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	}
+}

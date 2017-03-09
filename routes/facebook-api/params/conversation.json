@@ -1,0 +1,13 @@
+{
+	"conversation-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"messages":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of all messages in the conversation."
+	}
+}

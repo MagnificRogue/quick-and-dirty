@@ -1,0 +1,8 @@
+{
+	"page-call-to-action-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+}

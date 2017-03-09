@@ -1,0 +1,313 @@
+{
+	"page-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"admin-notes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Notes of this page."
+	},
+	"albums":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Photo albums for this Page."
+		},
+	"blocked":{
+		"type":"checkbox",
+		"required":false,
+		"about":"User or Page Profiles blocked from this Page."
+	},
+	"business_activities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The business activities related to this page."
+		},
+	"call_to_actions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The call-to-action created by this Page."
+		},
+	"claimed_urls":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Claimed URLs for Instant Articles that are associated with this Facebook Page."
+	},
+	"conversations":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The Facebook Messages conversations that this Page is involved in."
+		},
+	"curated_collections":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The curated collections created by this page."
+		},
+	"events":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Events for this Page."
+		},
+	"featured_videos_collection":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Featured Videos for this Page."
+		},
+	"feed":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The feed of posts (including status updates) and links published by this page, or by others on this page."
+		},
+	"global_brand_children":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Children Pages of a Global Page's root Page. Only root Page can return children Pages."
+		},
+	"insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This Page's Insights data. Global brand default Page will return its own insights data, while root Page will return integrated insights of the whole hierarchy.."
+	},
+	"instagram_accounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Linked Instagram accounts for this Page."
+		},
+	"instant_articles":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Instant articles associated with this Page."
+		},
+	"instant_articles_insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Instant Article Aggregated Insights."
+		},
+	"labels":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Labels of the Page."
+		},
+	"leadgen_context_cards":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A library of leadgen context cards that can be reused across forms."
+		},
+	"leadgen_draft_forms":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A library of lead generation draft forms created for this page."
+		},
+	"leadgen_forms":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A library of lead generation forms created for this page."
+		},
+	"leadgen_legal_content":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A library of leadgen legal content that can be reused across forms."
+		},
+	"leadgen_qualifiers":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of qualifiers available on a page, includes advertiser customized qualifiers."
+		},
+	"leadgen_whitelisted_users":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of all whitelisted users of a page."
+		},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The Pages that this Page Likes."
+		},
+	"live_videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Live videos from this page."
+		},
+	"locations":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The location Pages that are children of this Page."
+		},
+	"media_fingerprints":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Media fingerprints from this page."
+		},
+	"messenger_profile":{
+		"type":"checkbox",
+		"required":false,
+		"about":"messenger profile."
+		},
+	"milestones":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This Page's milestones."
+		},
+	"native_workflows":{
+		"type":"checkbox",
+		"required":false,
+		"about":"native workflows."
+		},
+	"nativeoffers":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The native offers created by this Page."
+		},
+	"page_backed_instagram_accounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Linked Page Backed Instagram accounts for this Page."
+		},
+	"photos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This Page's photos."
+		},
+	"picture":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This Page's profile picture."
+		},
+	"place_topics":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The place topic associated with the categories of the page."
+		},
+	"posts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The feed of posts (including status updates) and links published by this page, or by others on this page."
+		},
+	"product_catalogs":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Product catalogs owned by this page."
+		},
+	"ratings":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Open Graph ratings given to this Page."
+		},
+	"roles":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The Page's Admins."
+		},
+	"saved_filters":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Filters saved in Page Publishing Tools."
+		},
+	"saved_message_responses":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All message responses that are saved by a page."
+		},
+	"screennames":{
+		"type":"checkbox",
+		"required":false,
+		"about":"External accounts. Applicable to Pages representing people."
+		},
+	"seasons":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Seasons for this show page."
+		},
+	"settings":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Controllable settings for this page."
+		},
+	"show_playlists":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Playlists for this show page."
+		},
+	"subscribed_apps":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Applications that have real time update subscriptions for this Page. Note that we will only return information about the current app."
+		},
+	"tabs":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This Page's tabs and the apps in them."
+		},
+	"tagged":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The photos, videos, and posts in which the Page has been tagged. A derivative of /feeds."
+		},
+	"thread_settingsthread_settings":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Messenger platform configs for the page."
+		},
+	"video_broadcasts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Video broadcasts from this page."
+		},
+	"video_copyright_rules":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Video copyright rules from this page."
+		},
+	"video_copyrights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Video copyrights from this page."
+		},
+	"video_lists":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Video Playlists for this Page."
+		},
+	"videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Videos for this Page."
+		},
+	"videos_you_can_use":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Provides a list of videos the Page can use for crossposting. Owners of these videos have granted permission for the Page to crosspost them.."
+		},
+	"notes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A Facebook Note created by a user or page."
+		},
+	"notifications":{
+		"type":"checkbox",
+		"required":false,
+		"about":"page/notifications API."
+		},
+	"promotable_posts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The feed of posts (including status updates) and links published by this page, or by others on this page."
+		},
+	"questions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Graph API Reference Question /question."
+		},
+	"statuses":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The feed of status messages published by this page.."
+		},
+	"threads":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A messages thread in Facebook Messenger"
+		}
+}

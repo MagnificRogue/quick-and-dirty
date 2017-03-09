@@ -1,0 +1,39 @@
+{
+	"album-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"24123523"
+	},
+	"picture":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return The cover photo of this album."
+	},
+	"photos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return the photos in an album on Facebook."
+	},
+	"sharedposts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return Stream posts that are shares of this album."
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return People who like this."
+	},
+	"reactions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return People who have reacted to this."
+	},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return Comments made on this."
+	}
+	
+}

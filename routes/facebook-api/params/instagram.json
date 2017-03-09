@@ -1,0 +1,7 @@
+{
+	"instagram-comment-id":
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	}

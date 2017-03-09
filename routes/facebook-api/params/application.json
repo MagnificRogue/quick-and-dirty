@@ -1,0 +1,173 @@
+{
+	"application-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"accounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return Test User accounts associated with the app."
+	},
+	"achievements":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return The full list of Games achievement types that have been registered by this app."
+	},
+	"ads_app_insights_dimensions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights dimensions data for this ads app"
+	},
+	"agencies":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The businesses which are not owner but can advertise for this app"
+	},
+	"analytics_app_events_exports":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of app events data exports for this app"
+	},
+	"app_event_types":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Info about App Events logged for the app"
+	},
+	"app_insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights data for this app"
+	},
+	"app_link_hosts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The app link hosts that are created for this app"
+	},
+	"appassets":{
+		"type":"checkbox",
+		"required":false,
+		"about":"appassets"	
+	},
+	"authorized_adaccounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The ad accounts which are authorized to advertise for this app"
+	},
+	"banned":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of people banned from this app"
+	},
+	"connections":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of Open Graph Action types associated with this app"
+	},
+	"custom_audience_third_party_id":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Custom audience third party ID"
+		},
+	"direct_deals":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Direct deals with advertisers for this publisher app"
+		},
+	"events":{
+		"type":"checkbox",
+		"required":false,
+		"about":"events"
+		},
+	"insights_event_labels":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights Event Labels for this app"
+	},
+	"moods_for_application":{
+		"type":"checkbox",
+		"required":false,
+		"about":"moods for application"
+		},
+	"object_types":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Open Graph Object types associated with this app"
+		},
+	"objects":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Open Graph objects"
+		},
+	"ozone_release":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The app releases related to this app"
+		},
+	"payments_test_users":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The list of payment test users for the app"
+		},
+	"permissions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The status of permissions that are have been submitted for Login Review"
+		},
+	"picture":{
+		"type":"checkbox",
+		"required":false,
+		"about":"An app's profile picture."
+		},
+	"products":{
+		"type":"checkbox",
+		"required":false,
+		"about":"In-app-purchaseable products associated with this app"
+		},
+	"purchases":{
+		"type":"checkbox",
+		"required":false,
+		"about":"In-app-purchaseable products of this app owned by the user"
+		},
+	"roles":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The developer roles defined for a Facebook app."
+		},
+	"services":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The set of pages that the service is provided for"
+		},
+	"groups":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Groups that belong to this app."
+		},
+	"insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights and metrics for an object"
+		},
+	"scores":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Scores from this Facebook game for a user and their friends."
+		},
+	"staticresources":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Usage statistics for any static resources used by a Facebook Canvas app."
+		},
+	"subscriptions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The Webhooks objects that this app has subscribed to."
+		},
+	"translations":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The strings from this app that were translated using our translations tools."
+		}	
+}

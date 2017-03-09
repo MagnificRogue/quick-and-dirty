@@ -1,0 +1,13 @@
+{
+	"page-label-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"users":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users that are associated with this label."
+	},
+}

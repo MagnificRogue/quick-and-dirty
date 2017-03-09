@@ -1,0 +1,13 @@
+{
+	"native-offer-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"views":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Multiple creative views of this native offer."
+	}
+}

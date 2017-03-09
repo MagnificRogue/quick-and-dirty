@@ -1,0 +1,18 @@
+{
+	"message-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"attachments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Files attached to a message."
+	},
+	"shares":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Shared items, including links, photos, videos, and stickers."
+		}
+}

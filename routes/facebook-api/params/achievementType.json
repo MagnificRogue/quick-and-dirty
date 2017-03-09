@@ -1,0 +1,8 @@
+{
+	"achievement-type-id":{
+		"type":"text",
+		"required":true,
+		"about":"",
+		"example":"24123523"
+	}
+}

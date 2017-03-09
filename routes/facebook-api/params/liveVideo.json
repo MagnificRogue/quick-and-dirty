@@ -1,0 +1,28 @@
+{
+	"live-video-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who like this."
+	},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Comments on this."
+		},
+	"errors":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Errors that occurred during the live stream"
+		},
+	"reactions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who reacted on this"
+		}
+}

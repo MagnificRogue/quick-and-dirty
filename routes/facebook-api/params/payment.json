@@ -1,0 +1,18 @@
+{
+	"payment-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"dispute":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Updates the dispute status of a payment."
+	},
+	"refunds":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Refunds a payment."
+		}
+}

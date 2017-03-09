@@ -1,0 +1,8 @@
+{
+	"media-fingerprint-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	}
+}

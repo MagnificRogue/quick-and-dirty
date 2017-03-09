@@ -1,0 +1,13 @@
+{
+	"saved-message-response-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"macros":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The position of the personalization macros used in the response"
+		}
+}

@@ -1,0 +1,43 @@
+{
+	"photo-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights data."
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who likes it."
+		},
+	"reactions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who reacted on this."
+	},
+	"sharedposts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The posts in which this photo is shared."
+		},
+	"sponsor_tags":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Sponsor pages tagged in the photo."
+	},
+	"tags":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The Users tagged in the photo."
+		},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Comments on an object."
+		}
+}

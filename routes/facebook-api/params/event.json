@@ -1,0 +1,73 @@
+{
+	"event-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"admins":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users that are admins of the event"
+	},
+	"attending":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users attending the event"
+		},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Comments on the event"
+	},
+	"declined":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users who declined the event invitation"
+		},
+	"interested":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users interested in the event"
+		},
+	"live_videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Live videos published to the event"
+	},
+	"maybe":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users who replied maybe to the event invitation"
+		},
+	"noreply":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users who have not replied to the event invitation"
+		},
+	"photos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Photos published to the event"
+		},
+	"picture":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Profile picture"
+		},
+	"roles":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of profiles having roles on the event"
+		},
+	"videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Videos published to the event"
+		},
+	"feed":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The feed of posts (including status updates) and links published to this event's wall."
+	}
+}

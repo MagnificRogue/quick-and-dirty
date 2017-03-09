@@ -1,0 +1,18 @@
+{
+	"instagram-user-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"agencies":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The businesses which are not owner but can advertise for this IG account"
+	},
+	"authorized_adaccounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The ad accounts which are authorized to advertise for this IG account"
+		}
+}

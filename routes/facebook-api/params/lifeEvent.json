@@ -1,0 +1,28 @@
+{
+	"life-event-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Comments on this milestone"
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Likes on this milestone"
+		},
+	"photos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Photos attached with this milestone"
+	},
+	"sharedposts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"shared posts"
+	}
+}

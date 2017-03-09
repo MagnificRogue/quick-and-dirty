@@ -1,0 +1,28 @@
+{
+	"open-graph-context-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"friends_tagged_at":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Friends who been tagged at this place."
+	},
+	"friends_who_like":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Friends who like this object."
+		},
+	"music_listen_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Friends who listened to this object."
+	},
+	"video_watch_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Friends who watched this object."
+		}
+}

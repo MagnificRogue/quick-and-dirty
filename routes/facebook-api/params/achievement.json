@@ -1,0 +1,18 @@
+{
+	"achievement-id":{
+		"type":"text",
+		"required":true,
+		"about":"",
+		"example":"24123523"
+	},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Retreive Comments on the achievement story."
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Retreive Likes on the achievement story."
+	}
+}

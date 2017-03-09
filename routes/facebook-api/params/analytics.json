@@ -1,0 +1,8 @@
+{
+	"analytics-app-events-export-id":{
+		"type":"text",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	}
+}

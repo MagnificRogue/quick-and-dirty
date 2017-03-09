@@ -1,0 +1,13 @@
+{
+	"application-context-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"friends_using_app":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return Friends who use this app."
+	}
+}

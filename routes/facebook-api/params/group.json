@@ -1,0 +1,58 @@
+{
+	"group-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"admins":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The admins of a group. This edge is only available to app and game groups."
+	},
+	"albums":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The photo albums created in a group."
+		},
+	"docs":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The docs in this group."
+	},
+	"events":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The events in this group."
+		},
+	"feed":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This group's feed."
+		},
+	"files":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Files uploaded to this group."
+	},
+	"live_videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Live videos for a Facebook Group."
+		},
+	"members":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All of the users who are members of this group."
+		},
+	"photos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Upload photos to a group's feed."
+		},
+	"videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Videos for a Facebook Group."
+		}
+}

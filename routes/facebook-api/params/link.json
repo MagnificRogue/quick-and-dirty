@@ -1,0 +1,18 @@
+{
+	"link-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who like this link."
+	},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Comments on this link."
+		}
+	}

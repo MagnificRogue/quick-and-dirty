@@ -1,0 +1,23 @@
+{
+	"commment-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return People who like this comment."
+	},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Return Comments that reply to this comment."
+		},
+	"private_replies":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Used to send private message reply to this comment (Page viewers only)."
+	}
+}
