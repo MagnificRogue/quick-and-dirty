@@ -1,0 +1,274 @@
+{
+	"user-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"accounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Facebook Pages this person administers/is an admin for."
+	},
+	"achievement":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Achievements made in Facebook games."
+	},
+	"ad_studies":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Ad studies that this person can view."
+	},
+	"adaccounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The advertising accounts to which this person has access."
+		},
+	"adcontracts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The person's ad contracts."
+		},
+	"adnetworkanalytics"{
+		"type":"checkbox",
+		"required":false,
+		"about":"Insights data for the person's Audience Network apps."
+		},
+	"albums":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The photo albums this person has created."
+		},
+	"apprequestformerrecipients":{
+		"type":"checkbox",
+		"required":false,
+		"about":"App requests."
+		},
+	"apprequests":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This person's pending requests from an app."
+		},
+	"books":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The books listed on this person's profile."
+	},
+	"business_activities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The business activities related to this user."
+		},
+	"conversations":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Facebook Messenger conversation"
+		},
+	"curated_collections":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The curated collections created by this user."
+		},
+	"events":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Events for this person. By default this does not include events the person has declined or not replied to."
+		},
+	"family":{
+		"type":"checkbox",
+		"required":false,
+		"about":"This person's family relationships."
+		},
+	"favorite_requests":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Developers' favorite requests to the Graph API."
+		},
+	"friendlists":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The person's custom friend lists."
+		},
+	"friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A person's friends."
+	},
+	"ids_for_business":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Business entities can claim ownership of multiple apps using the Business Manager. This edge returns the list of IDs that this user has in any of those other apps."
+		},
+	"invitable_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A list of friends that can be invited to install a Facebook Canvas app."
+		},
+	"leadgen_forms":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A list of lead generation forms belonging to Pages that the user has advertiser permissions on."
+		},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All the Pages this person has liked."
+		},
+	"live_videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Live videos from this person."
+		},
+	"movies":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Movies this person likes."
+		},
+	"music":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Music this person likes."
+		},
+	"objects":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Objects."
+		},
+	"permissions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The permissions that the person has granted this app."
+		},
+	"personal_ad_accounts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The advertising accounts to which this person has personal access."
+		},
+	"photos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Photos the person is tagged in or has uploaded."
+		},
+	"picture":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The person's profile picture."
+		},
+	"promotable_domains":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All the domains user can promote."
+		},
+	"promotable_events":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All the events which user can promote."
+		},
+	"request_history":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Developers' Graph API request history."
+		},
+	"session_keys":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Any session keys that the app knows the user by."
+		},
+	"stream_filters":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A list of filters that can be applied to the News Feed edge."
+		},
+	"taggable_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Friends that can be tagged in content published via the Graph API."
+		},
+	"tagged_places":{
+		"type":"checkbox",
+		"required":false,
+		"about":"List of tagged places for this person. It can include tags on videos, posts, statuses or links."
+		},
+	"television":{
+		"type":"checkbox",
+		"required":false,
+		"about":"TV shows this person likes."
+		},
+	"video_broadcasts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Video broadcasts from this person."
+		},
+	
+	"videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Videos the person is tagged in or uploaded."
+		},
+	"checkins":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The checkins this person has made."
+		},
+	"feed":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The feed of posts (including status updates) and links published by this person."
+		},
+	"friendrequests":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A person's pending friend requests."
+		},
+	"home":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A person's Facebook homepage feed."
+		},
+	"inbox":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A person's Facebook Messages inbox."
+		},
+	"locations":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A feed of posts and photos that include location information and in which this person has been tagged. This is useful for constructing a chronology of places that the person has visited."
+		},
+	"mutualfriends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The list of mutual friends between two people."
+		},
+	"notifications":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The unread Facebook notifications that a person has."
+		},
+	"outbox":{
+		"type":"checkbox",
+		"required":false,
+		"about":"A person's Facebook Messages outbox."
+		},
+	"questions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The questions that a person has created."
+		},
+	"scores":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The scores this person has received from Facebook Games that they've played."
+		},
+	"subscribers":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The profiles that are following this person."
+		},
+	"subscribedto":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The profile that this person is following."
+		}
+}

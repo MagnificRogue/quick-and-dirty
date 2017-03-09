@@ -1,0 +1,13 @@
+{
+	"test-user-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The friends of the test user - this edge can be used to friend two test users."
+		}
+}

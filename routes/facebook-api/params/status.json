@@ -23,6 +23,6 @@
 	"comments":{
 		"type":"checkbox",
 		"required":false,
-		"about":"Comments on this status."
+		"about":"Comments on this statuss."
 	}
 }

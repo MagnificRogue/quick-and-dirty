@@ -1,0 +1,13 @@
+{
+	"video-list-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"videos":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Videos in the playlist."
+	}
+}

@@ -32,8 +32,11 @@ router.get('/', function(req, res, next) {
 												'facebook/Photo',	'facebook/Place',		'facebook/Place-Tag',
 												'facebook/Place-Topic',						'facebook/Post',
 												'facebook/Promotion-Info'					'facebook/Request',
-												'facebook/Saved-Message-Response'
-												]
+												'facebook/Saved-Message-Response', 			'facebook/Test-User',
+												'facebook/Thread',	'facebook/User',		'facebook/User-Context',
+												'facebook/Video',	'facebook/Video-Copyright',
+												'facebook/Video-Copyright-Rule',			'facebook/Video-List',
+												'facebook/Work-Experience']
                                     });
 });
 
@@ -1312,6 +1315,243 @@ router.post('/Status',function(req,res,next){
 		res.send(JSON.stringify(fbData));
 		//mongoDB
 	});
+});
+
+/* Test-User 1 edge */
+router.get('/Test-User',function(req,res,next){
+	var requestParams = require('./params/testUser');
+	res.render('facebook-api/paramForm',{title: 'A test user associated with a Facebook app. Test users are created and associated using the /{app-id}/accounts/test-users edge or in the App Dashboard.',
+							url: '/facebook/Test-User',
+							params: requestParams});
+});
+router.post('/Test-User',function(req,res,next){
+	var fbData = [];
+	var promises = [];
+	for (key in req.body){
+		if (req.body[key]!= 'on'){
+			var node = req.body[key];
+		}
+	} // find the node
+	for (key in req.body){
+		if (req.body[key] != 'on'){
+			var base = fbAddEdges(node,'').then(function(data){
+				fbData.push(data); //store the returned fb instance
+			});
+			promises.push(base);
+		}else{	
+			var edges = fbAddEdges(node,key).then(function(data){
+				fbData.push(data);
+			});
+			promises.push(edges);
+		}
+	}
+	when.all(promises).then(function(){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fbData));
+		//mongoDB
+	});
+});
+
+/* Thread 0 edge */
+router.get('/Thread',function(req,res,next){
+	var requestParams = require('./params/thread');
+	res.render('facebook-api/paramForm',{title: 'A Facebook Messages conversation thread. This endpoint is only '+
+												'accessible for users that are developers of the app making the ' +
+'												request. Pages should use the Conversation object.',
+							url: '/facebook/Thread',
+							params: requestParams});
+});
+router.post('/Thread',function(req,res,next){
+	FB.api(req.body['trhead-id'],function(fb){
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(fb));
+		//mongodb?
+	});	
+});
+
+/* User 56 edge */
+router.get('/User',function(req,res,next){
+	var requestParams = require('./params/user');
+	res.render('facebook-api/paramForm',{title: 'A user represents a person on Facebook. The /{user-id} node returns a single user.',
+							url: '/facebook/User',
+							params: requestParams});
+});
+router.post('/User',function(req,res,next){
+	var fbData = [];
+	var promises = [];
+	for (key in req.body){
+		if (req.body[key]!= 'on'){
+			var node = req.body[key];
+		}
+	} // find the node
+	for (key in req.body){
+		if (req.body[key] != 'on'){
+			var base = fbAddEdges(node,'').then(function(data){
+				fbData.push(data); //store the returned fb instance
+			});
+			promises.push(base);
+		}else{	
+			var edges = fbAddEdges(node,key).then(function(data){
+				fbData.push(data);
+			});
+			promises.push(edges);
+		}
+	}
+	when.all(promises).then(function(){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fbData));
+		//mongoDB
+	});
+});
+
+/* User- 4 edge */
+router.get('/User-Context',function(req,res,next){
+	var requestParams = require('./params/userContext');
+	res.render('facebook-api/paramForm',{title: 'Social context for a person.',
+							url: '/facebook/User-Context',
+							params: requestParams});
+});
+router.post('/User-Context',function(req,res,next){
+	var fbData = [];
+	var promises = [];
+	for (key in req.body){
+		if (req.body[key]!= 'on'){
+			var node = req.body[key];
+		}
+	} // find the node
+	for (key in req.body){
+		if (req.body[key] != 'on'){
+			var base = fbAddEdges(node,'').then(function(data){
+				fbData.push(data); //store the returned fb instance
+			});
+			promises.push(base);
+		}else{	
+			var edges = fbAddEdges(node,key).then(function(data){
+				fbData.push(data);
+			});
+			promises.push(edges);
+		}
+	}
+	when.all(promises).then(function(){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fbData));
+		//mongoDB
+	});
+});
+
+/* Video 10 edges */
+router.get('/Video',function(req,res,next){
+	var requestParams = require('./params/video');
+	res.render('facebook-api/paramForm',{title: 'Represents an individual video on Facebook.',
+							url: '/facebook/Video',
+							params: requestParams});
+});
+router.post('/Video',function(req,res,next){
+	var fbData = [];
+	var promises = [];
+	for (key in req.body){
+		if (req.body[key]!= 'on'){
+			var node = req.body[key];
+		}
+	} // find the node
+	for (key in req.body){
+		if (req.body[key] != 'on'){
+			var base = fbAddEdges(node,'').then(function(data){
+				fbData.push(data); //store the returned fb instance
+			});
+			promises.push(base);
+		}else{	
+			var edges = fbAddEdges(node,key).then(function(data){
+				fbData.push(data);
+			});
+			promises.push(edges);
+		}
+	}
+	when.all(promises).then(function(){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fbData));
+		//mongoDB
+	});
+});
+
+/* Video-Copyright 0 edge */
+router.get('/Video-Copyright',function(req,res,next){
+	var requestParams = require('./params/videoCopyright');
+	res.render('facebook-api/paramForm',{title: 'For more information about the Rights Manager API, check out our Rights Manager API intro docs.',
+							url: '/facebook/Video-Copyright',
+							params: requestParams});
+});
+router.post('/Video-Copyright',function(req,res,next){
+	FB.api(req.body['video-copyright-id'],function(fb){
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(fb));
+		//mongodb?
+	});	
+});
+
+/* Video-Copyright-Rule 0 edge */
+router.get('/Video-Copyright-Rule',function(req,res,next){
+	var requestParams = require('./params/videoCopyrightRule');
+	res.render('facebook-api/paramForm',{title: 'For more information about the Rights Manager API, check out our Rights Manager API intro docs.',
+							url: '/facebook/Video-Copyright-Rule',
+							params: requestParams});
+});
+router.post('/Video-Copyright-Rule',function(req,res,next){
+	FB.api(req.body['video-copyright-rule-id'],function(fb){
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(fb));
+		//mongodb?
+	});	
+});
+
+/* Video-List 1 edge */
+router.get('/Video-List',function(req,res,next){
+	var requestParams = require('./params/videoList');
+	res.render('facebook-api/paramForm',{title: 'A list of videos in the Graph API. Used from other nodes like Pages that might have a list of videos.',
+							url: '/facebook/Video-List',
+							params: requestParams});
+});
+router.post('/Video-List',function(req,res,next){
+	var fbData = [];
+	var promises = [];
+	for (key in req.body){
+		if (req.body[key]!= 'on'){
+			var node = req.body[key];
+		}
+	} // find the node
+	for (key in req.body){
+		if (req.body[key] != 'on'){
+			var base = fbAddEdges(node,'').then(function(data){
+				fbData.push(data); //store the returned fb instance
+			});
+			promises.push(base);
+		}else{	
+			var edges = fbAddEdges(node,key).then(function(data){
+				fbData.push(data);
+			});
+			promises.push(edges);
+		}
+	}
+	when.all(promises).then(function(){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fbData));
+		//mongoDB
+	});
+});
+
+/* Work-Experience 0 edge */
+router.get('/Work-Experience',function(req,res,next){
+	var requestParams = require('./params/workExperience');
+	res.render('facebook-api/paramForm',{title: 'Information about a user\'s work',
+							url: '/facebook/Work-Experience',
+							params: requestParams});
+});
+router.post('/Work-Experience',function(req,res,next){
+	FB.api(req.body['work-experience-id'],function(fb){
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(fb));
+		//mongodb?
+	});	
 });
 
 /* add edges using promise library */

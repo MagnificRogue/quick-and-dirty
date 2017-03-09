@@ -1,0 +1,28 @@
+{
+	"user-context-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"all_mutual_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"All friends that the viewer and the target person have in common. This includes the friends who do not use your app."
+	},
+	"mutual_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Social context edge providing a list of Facebook friends that have logged into the app that the viewer and the target person have in common."
+	},
+	"mutual_likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Social context edge providing a list of the liked Pages that the calling person and the target person have in common."
+	},
+	"three_degree_mutual_friends":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Friends of the viewer who are mutual friends with the target and have the app installed."
+		}
+	}

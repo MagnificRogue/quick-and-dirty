@@ -1,0 +1,58 @@
+{
+	"video-id":{
+		"type":"number",
+		"required":true,
+		"about":"",
+		"example":"282332523"
+	},
+	"auto_generated_captions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Auto-generated Captions from automated speech recognition system."
+	},
+	"captions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Captions for the video."
+		},
+	"comments":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users comments for the video."
+	},
+	"likes":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who like this."
+		},
+	"reactions":{
+		"type":"checkbox",
+		"required":false,
+		"about":"People who reacted on this."
+		},
+	"sharedposts":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Posts that share this video."
+	},
+	"sponsor_tags":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Sponsor pages tagged in the video."
+		},
+	"tags":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Users tagged in the video."
+		},
+	"thumbnails":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Thumbnails for the video."
+		},
+	"video_insights":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Total insights from all video posts associated with this video."
+		}
+}
