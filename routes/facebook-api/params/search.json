@@ -1,0 +1,38 @@
+{
+	"q":{
+		"type":"text",
+		"required":true,
+		"about":"query",
+		"example":"UIUC"
+	},
+	"user":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Search for a person (if they allow their name to be searched for)."
+	},
+	"page":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Search for a Page."
+	},
+	"event":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Search for an event."
+	},
+	"group":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Search for a Group."
+	},
+	"place":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Search for a place. You can narrow your search to a specific location and distance by adding the center parameter (with latitude and longitude) and an optional distance parameter (in meters):."
+	},
+	"placetopic":{
+		"type":"checkbox",
+		"required":false,
+		"about":"Returns a list of possible place Page topics and their IDs. Use with topic_filter=all parameter to get the full list."
+	}
+}

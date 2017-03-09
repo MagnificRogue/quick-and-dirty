@@ -13,7 +13,7 @@ FB.setAccessToken(config.fb.access_token); //token need to renew every 60 days!
 /* home page. */
 router.get('/', function(req, res, next) {
   res.render('facebook-api/index', { title: 'Facebook API Viewer' ,
-                                    endpoints: ['facebook/search',	'facebook/Achievement',	'facebook/Achievement-Type',
+                                    endpoints: ['facebook/SP-Search',	'facebook/Achievement',	'facebook/Achievement-Type',
 												'facebook/Album',	'facebook/Analytics',	'facebook/App-Link-Host',
 												'facebook/App-Request',						'facebook/Application',
 												'facebook/Application-Context',				'facebook/Comment',
@@ -184,7 +184,7 @@ router.post('/Achievement',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -234,7 +234,7 @@ router.post('/ALbum',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -314,7 +314,7 @@ router.post('/Application',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -349,7 +349,7 @@ router.post('/Application-Context',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -385,7 +385,7 @@ router.post('/Comment',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -420,7 +420,7 @@ router.post('/Conversation',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -516,7 +516,7 @@ router.post('/Event',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -567,7 +567,7 @@ router.post('/Group',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -632,7 +632,7 @@ router.post('/Instagram-User',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -667,7 +667,7 @@ router.post('/Life-Event',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -702,7 +702,7 @@ router.post('/Link',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -737,7 +737,7 @@ router.post('/Live-Video',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -802,7 +802,7 @@ router.post('/Message',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -837,7 +837,7 @@ router.post('/Milestone',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -872,7 +872,7 @@ router.post('/Native-Offer',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -937,7 +937,7 @@ router.post('/Open-Graph-Context',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -987,7 +987,7 @@ router.post('/Page',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1052,7 +1052,7 @@ router.post('/Page-Label',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1087,7 +1087,7 @@ router.post('/Payment',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1122,7 +1122,7 @@ router.post('/Photo',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1202,7 +1202,7 @@ router.post('/Post',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1267,7 +1267,7 @@ router.post('/Saved-Message-Response',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1304,7 +1304,7 @@ router.post('/Status',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1339,7 +1339,7 @@ router.post('/Test-User',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1391,7 +1391,7 @@ router.post('/User',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1426,7 +1426,7 @@ router.post('/User-Context',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1461,7 +1461,7 @@ router.post('/Video',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1526,7 +1526,37 @@ router.post('/Video-List',function(req,res,next){
 			});
 			promises.push(base);
 		}else{	
-			var edges = fbAddEdges(node,key).then(function(data){
+			var edges = fbAddEdges(node,'/'+key).then(function(data){
+				fbData.push(data);
+			});
+			promises.push(edges);
+		}
+	}
+	when.all(promises).then(function(){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fbData));
+		//mongoDB
+	});
+});
+
+/* SPECIAL Search 6 edges */
+router.get('/SP-Search',function(req,res,next){
+	var requestParams = require('./params/search');
+	res.render('facebook-api/paramForm',{title: 'You can search over many public objects in the social graph with the /search endpoint.',
+							url: '/facebook/SP-Search',
+							params: requestParams});
+});
+router.post('/SP-Search',function(req,res,next){
+	var fbData = [];
+	var promises = [];
+	for (key in req.body){
+		if (req.body[key]!= 'on'){
+			var node = req.body[key];
+		}
+	} // find the node
+	for (key in req.body){
+		if (req.body[key] === 'on'){
+			var edges = fbAddEdges('search?q='+node,'&type='+key).then(function(data){
 				fbData.push(data);
 			});
 			promises.push(edges);
@@ -1557,8 +1587,8 @@ router.post('/Work-Experience',function(req,res,next){
 /* add edges using promise library */
 var fbAddEdges = function(base,edge){
 	var promise = new Promise((resolve,reject) => {
-		console.log(base + '/'+ edge);
-		FB.api(base + '/'+ edge, function(fb){
+		console.log(base + edge);
+		FB.api(base + edge, function(fb){
 				resolve({key:edge,value:fb});
 			});
 		});
