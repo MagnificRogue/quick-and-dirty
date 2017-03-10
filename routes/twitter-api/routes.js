@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var config = require('../../config');
-var DB = require('../../bin/connectDB');
+var MongoClient = require('mongodb').MongoClient;
 var url = require('url');
 var Promise = require('promise');
 var Twitter = require('twitter');
@@ -41,8 +41,12 @@ router.get('/', function(req, res, next) {
 												'twitter/statuses/home_timeline',		'twitter/statuses/lookup',
 												'twitter/statuses/mentions_timeline',	'twitter/statuses/retweeters/ids',
 												'twitter/statuses/retweets/:id',		'twitter/statuses/retweets_of_me',
-												'twitter/statuses/show/:id',			'twitter/statuses/user_timeline',	
-												'twitter/result']
+												'twitter/statuses/show/:id',			'twitter/statuses/user_timeline',
+												'twitter/trends/available',				'twitter/trends/closest',
+												'twitter/trends/place',					'twitter/users/lookup',
+												'twitter/users/profile_banner',			'twitter/users/search',
+												'twitter/users/show',					'twitter/users/suggestions',
+												'twitter/users/suggestions/:slug',		'twitter/users/suggestions/:slug/members']
                                     });
 });
 
@@ -68,7 +72,7 @@ router.get('/account/settings',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			//mongoDB
+			mongoStore(tweets);
 		});
 });
 
@@ -78,7 +82,7 @@ router.get('/help/configuration',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			//mongoDB
+			mongoStore(tweets);
 		});
 });
 
@@ -88,7 +92,7 @@ router.get('/help/languages',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			//mongoDB
+			mongoStore(tweets);
 		});
 });
 
@@ -98,7 +102,7 @@ router.get('/help/privacy',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			//mongoDB
+			mongoStore(tweets);
 		});
 });
 
@@ -108,7 +112,7 @@ router.get('/help/tos',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			//mongoDB
+			mongoStore(tweets);
 		});
 });
 
@@ -118,7 +122,17 @@ router.get('/saved_searches/list',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			//mongoDB
+			mongoStore(tweets);
+		});
+});
+
+/* trends/available */
+router.get('/trends/available',function(req,res,next){
+	client.get('trends/available',{}, function(error,tweets,response){
+			if(error) throw JSON.stringify(error);
+			res.setHeader('Content-Type','application/json');
+			res.send(JSON.stringify(tweets));
+			mongoStore(tweets);
 		});
 });
 
@@ -133,7 +147,7 @@ router.post('/account/verify_credentials',function(req,res,next){
 	twitterPost(req, 'account/verify_credentials').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -148,7 +162,7 @@ router.post('/application/rate_limit_status',function(req,res,next){
 	twitterPost(req, 'application/rate_limit_status').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -163,7 +177,7 @@ router.post('/blocks/ids',function(req,res,next){
 	twitterPost(req, 'blocks/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -178,7 +192,7 @@ router.post('/blocks/list',function(req,res,next){
 	twitterPost(req, 'blocks/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -193,7 +207,7 @@ router.post('/collections/entries',function(req,res,next){
 	twitterPost(req, 'collections/entries').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -208,7 +222,7 @@ router.post('/collections/list',function(req,res,next){
 	twitterPost(req, 'collections/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -223,7 +237,7 @@ router.post('/collections/show',function(req,res,next){
 	twitterPost(req, 'collections/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -238,7 +252,7 @@ router.post('/direct_messages',function(req,res,next){
 	twitterPost(req, 'direct_messages').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -253,7 +267,7 @@ router.post('/direct_messages/sent',function(req,res,next){
 	twitterPost(req, 'direct_messages/sent').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -268,7 +282,7 @@ router.post('/direct_messages/show',function(req,res,next){
 	twitterPost(req, 'direct_messages/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -283,7 +297,7 @@ router.post('/favorites/list',function(req,res,next){
 	twitterPost(req, 'favorites/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -298,7 +312,7 @@ router.post('/followers/ids',function(req,res,next){
 	twitterPost(req, 'followers/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -313,7 +327,7 @@ router.post('/followers/list',function(req,res,next){
 	twitterPost(req, 'followers/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -328,7 +342,7 @@ router.post('/friends/ids',function(req,res,next){
 	twitterPost(req, 'friends/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -343,7 +357,7 @@ router.post('/friends/list',function(req,res,next){
 	twitterPost(req, 'friends/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -358,7 +372,7 @@ router.post('/friendships/incoming',function(req,res,next){
 	twitterPost(req, 'friendships/incoming').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -373,7 +387,7 @@ router.post('/friendships/lookup',function(req,res,next){
 	twitterPost(req, 'friendships/lookup').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -388,7 +402,7 @@ router.post('/friendships/no_retweets/ids',function(req,res,next){
 	twitterPost(req, 'friendships/no_retweets/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -403,7 +417,7 @@ router.post('/friendships/outgoing',function(req,res,next){
 	twitterPost(req, 'friendships/outgoing').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -418,7 +432,7 @@ router.post('/friendships/show',function(req,res,next){
 	twitterPost(req, 'friendships/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -433,7 +447,7 @@ router.post('/geo/id/:place_id',function(req,res,next){
 	twitterPost(req, 'geo/id/:place_id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -448,7 +462,7 @@ router.post('/geo/reverse_geocode',function(req,res,next){
 	twitterPost(req, 'geo/reverse_geocode').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -466,7 +480,7 @@ router.post('/geo/search',function(req,res,next){
 	twitterPost(req, 'geo/search').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -481,7 +495,7 @@ router.post('/lists/list',function(req,res,next){
 	twitterPost(req, 'lists/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -496,7 +510,7 @@ router.post('/lists/members',function(req,res,next){
 	twitterPost(req, 'lists/members').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -511,7 +525,7 @@ router.post('/lists/members/show',function(req,res,next){
 	twitterPost(req, 'lists/members/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -526,7 +540,7 @@ router.post('/lists/memberships',function(req,res,next){
 	twitterPost(req, 'lists/memberships').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -541,7 +555,7 @@ router.post('/lists/ownerships',function(req,res,next){
 	twitterPost(req, 'lists/ownerships').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -556,7 +570,7 @@ router.post('/lists/show',function(req,res,next){
 	twitterPost(req, 'lists/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -571,7 +585,7 @@ router.post('/lists/statuses',function(req,res,next){
 	twitterPost(req, 'lists/statuses').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -586,7 +600,7 @@ router.post('/lists/subscribers',function(req,res,next){
 	twitterPost(req, 'lists/subscribers').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -601,7 +615,7 @@ router.post('/lists/subscribers/show',function(req,res,next){
 	twitterPost(req, 'lists/subscribers/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -616,7 +630,7 @@ router.post('/lists/subscriptions',function(req,res,next){
 	twitterPost(req, 'lists/subscriptions').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -631,7 +645,7 @@ router.post('/mutes/users/ids',function(req,res,next){
 	twitterPost(req, 'mutes/users/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -646,7 +660,7 @@ router.post('/mutes/users/list',function(req,res,next){
 	twitterPost(req, 'mutes/users/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -661,7 +675,7 @@ router.post('/saved_searches/show/:id',function(req,res,next){
 	twitterPost(req, 'saved_searches/show/:id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -676,7 +690,7 @@ router.post('/statuses/home_timeline',function(req,res,next){
 	twitterPost(req, 'statuses/home_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -691,7 +705,7 @@ router.post('/statuses/lookup',function(req,res,next){
 	twitterPost(req, 'statuses/lookup').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -706,7 +720,7 @@ router.post('/statuses/mentions_timeline',function(req,res,next){
 	twitterPost(req, 'statuses/mentions_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -721,7 +735,7 @@ router.post('/statuses/retweeters/ids',function(req,res,next){
 	twitterPost(req, 'statuses/retweeters/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -736,7 +750,7 @@ router.post('/statuses/retweets/:id',function(req,res,next){
 	twitterPost(req, 'statuses/retweets/:id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -751,7 +765,7 @@ router.post('/statuses/retweets_of_me',function(req,res,next){
 	twitterPost(req, 'statuses/retweets_of_me').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -766,7 +780,7 @@ router.post('/statuses/show/:id',function(req,res,next){
 	twitterPost(req, 'statuses/show/:id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
 	});	
 });
 
@@ -781,7 +795,142 @@ router.post('/statuses/user_timeline',function(req,res,next){
 	twitterPost(req, 'statuses/user_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		//mongodb?
+		mongoStore(tweets);
+	});	
+});
+
+/* trends/closest */
+router.get('/trends/closest',function(req,res,next){
+	var requestParams = require('./params/trendsClosestParams');
+	res.render('twitter-api/paramForm',{title: 'Returns the locations that Twitter has trending topic information for, closest to a specified location.',
+										url: '/twitter/trends/closest',
+										params: requestParams});
+});
+router.post('/trends/closest',function(req,res,next){
+	twitterPost(req, 'trends/closest').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* trends/place */
+router.get('/trends/place',function(req,res,next){
+	var requestParams = require('./params/trendsPlaceParams');
+	res.render('twitter-api/paramForm',{title: 'Returns the top 50 trending topics for a specific WOEID, if trending information is available for it.',
+										url: '/twitter/trends/place',
+										params: requestParams});
+});
+router.post('/trends/place',function(req,res,next){
+	twitterPost(req, 'trends/place').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/lookup */
+router.get('/users/lookup',function(req,res,next){
+	var requestParams = require('./params/usersLookupParams');
+	res.render('twitter-api/paramForm',{title: 'Returns fully-hydrated user objects for up to 100 users per request, as specified by comma-separated values passed to the user_id and/or screen_name parameters.',
+										url: '/twitter/users/lookup',
+										params: requestParams});
+});
+router.post('/users/lookup',function(req,res,next){
+	twitterPost(req, 'users/lookup').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/profile_banner */
+router.get('/users/profile_banner',function(req,res,next){
+	var requestParams = require('./params/usersBannerParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a map of the available size variations of the specified user’s profile banner.',
+										url: '/twitter/users/profile_banner',
+										params: requestParams});
+});
+router.post('/users/profile_banner',function(req,res,next){
+	twitterPost(req, 'users/profile_banner').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/search */
+router.get('/users/search',function(req,res,next){
+	var requestParams = require('./params/usersSearchParams');
+	res.render('twitter-api/paramForm',{title: 'Provides a simple, relevance-based search interface to public user accounts on Twitter.',
+										url: '/twitter/users/search',
+										params: requestParams});
+});
+router.post('/users/search',function(req,res,next){
+	twitterPost(req, 'users/search').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/show */
+router.get('/users/show',function(req,res,next){
+	var requestParams = require('./params/usersShowParams');
+	res.render('twitter-api/paramForm',{title: 'Returns a variety of information about the user specified by the required user_id or screen_name parameter.',
+										url: '/twitter/users/show',
+										params: requestParams});
+});
+router.post('/users/show',function(req,res,next){
+	twitterPost(req, 'users/show').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/suggestions */
+router.get('/users/suggestions',function(req,res,next){
+	var requestParams = require('./params/usersSuggestionsParams');
+	res.render('twitter-api/paramForm',{title: 'Access to Twitter’s suggested user list. This returns the list of suggested user categories.',
+										url: '/twitter/users/suggestions',
+										params: requestParams});
+});
+router.post('/users/suggestions',function(req,res,next){
+	twitterPost(req, 'users/suggestions').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/suggestions/:slug */
+router.get('/users/suggestions/:slug',function(req,res,next){
+	var requestParams = require('./params/usersSuggestionsSlugParams');
+	res.render('twitter-api/paramForm',{title: 'Access the users in a given category of the Twitter suggested user list.',
+										url: '/twitter/users/suggestions/:slug',
+										params: requestParams});
+});
+router.post('/users/suggestions/:slug',function(req,res,next){
+	twitterPost(req, 'users/suggestions/:slug').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
+	});	
+});
+
+/* users/suggestions/:slug/members */
+router.get('/users/suggestions/:slug/members',function(req,res,next){
+	var requestParams = require('./params/usersSuggestionsMembersParams');
+	res.render('twitter-api/paramForm',{title: 'Access the users in a given category of the Twitter suggested user list and return their most recent status if they are not a protected user.',
+										url: '/twitter/users/suggestions/:slug/members',
+										params: requestParams});
+});
+router.post('/users/suggestions/:slug/members',function(req,res,next){
+	twitterPost(req, 'users/suggestions/:slug/members').then(function(tweets){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(tweets));
+		mongoStore(tweets);
 	});	
 });
 
@@ -806,5 +955,20 @@ twitterPost = function(req,base_url){
 	});
 	return promise;	
 }
+
+/* mongoDB store the data*/
+var mongoStore = function(data){
+	MongoClient.connect(config.mongo.url,(err,db)=>{
+		var collection = db.collection(config.mongo.collection);
+		var time = + new Date();
+		collection.insert({time:time, data:data},(err,result)=>{
+		if(err){
+				console.log('Insertion error:', err);
+				}
+			console.log(result);
+		});
+	});
+}
+
 
 module.exports = router;
