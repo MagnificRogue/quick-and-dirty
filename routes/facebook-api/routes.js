@@ -19,7 +19,8 @@ router.get('/', function(req, res, next) {
 												'facebook/Application-Context',				'facebook/Comment',
 												'facebook/Conversation',					'facebook/Debug-Token',
 												'facebook/Doc',		'facebook/Domain',		'facebook/Education-Experience',
-												'facebook/Event',	'facebook/Friend-List',	'facebook/Group-Doc',
+												'facebook/Event',	'facebook/Friend-List',	'facebook/Group',
+												'facebook/Group-Doc',
 												'facebook/Instagram-Comment',				'facebook/Instagram-User',
 												'facebook/Life-Event',						'facebook/Link',
 												'facebook/Live-Video',						'facebook/Mailing-Address',
@@ -162,7 +163,7 @@ var fbSearchPtopic = function(query){
 	return promise;
 }
 
-/* Achievement + 2 edges */
+/* Achievement + fields + 2 edges */
 router.get('/Achievement',function(req,res,next){
 	var requestParams = require('./params/achievement');
 	res.render('facebook-api/paramForm',{title: 'Represents a user gaining an achievement in a Facebook game.',
@@ -179,7 +180,9 @@ router.post('/Achievement',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','from','publish_time','application','data',
+						  'type','no_feed_story'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -193,11 +196,11 @@ router.post('/Achievement',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
-/* Achievement-Type + 0 edge */
+/* Achievement-Type + fields + 0 edge */
 router.get('/Achievement-Type',function(req,res,next){
 	var requestParams = require('./params/achievementType');
 	res.render('facebook-api/paramForm',{title: 'A games achievement type created by a Facebook App',
@@ -205,14 +208,16 @@ router.get('/Achievement-Type',function(req,res,next){
 							params: requestParams});
 });
 router.post('/Achievement-Type',function(req,res,next){
-	FB.api(req.body['achievement-type-id'],function(fb){
+	FB.api(req.body['achievement-type-id'],{fields:['id','type','title',
+			'url','description','image','data','updated_time',
+			'created_time','application','context','is_scraped']},function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Album + 6 edges */
+/* Album + fields + 6 edges */
 router.get('/Album',function(req,res,next){
 	var requestParams = require('./params/album');
 	res.render('facebook-api/paramForm',{title: 'Represents a photo album. The /{album-id} node returns a single album.',
@@ -229,7 +234,10 @@ router.post('/ALbum',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','can_upload','count','cover_photo',
+			'created_time','description','event','from','link','location',
+			'name','place','privacy','type','updated_time'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -243,7 +251,7 @@ router.post('/ALbum',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		////mongoStore(fbData);
 	});
 });
 
@@ -258,7 +266,7 @@ router.post('/Analytics',function(req,res,next){
 	FB.api(req.body['analytics-app-events-export-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -273,7 +281,7 @@ router.post('/App-Link-Host',function(req,res,next){
 	FB.api(req.body['app-link-host-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -288,7 +296,7 @@ router.post('/App-Request',function(req,res,next){
 	FB.api(req.body['app-request-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -323,7 +331,7 @@ router.post('/Application',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -358,7 +366,7 @@ router.post('/Application-Context',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -394,7 +402,7 @@ router.post('/Comment',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -429,7 +437,7 @@ router.post('/Conversation',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -444,7 +452,7 @@ router.post('/Debug-Token',function(req,res,next){
 	FB.api('debug_token?input_token='+ req.body['input-token'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -459,7 +467,7 @@ router.post('/Doc',function(req,res,next){
 	FB.api(req.body['doc-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -475,11 +483,11 @@ router.post('/Domain',function(req,res,next){
 	FB.api(req.body['domain-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Education-Experience 0 edge */
+/* Education-Experience fields + 0 edge */
 router.get('/Education-Experience',function(req,res,next){
 	var requestParams = require('./params/education');
 	res.render('facebook-api/paramForm',{title: 'Reading The person\'s education history.',
@@ -487,14 +495,16 @@ router.get('/Education-Experience',function(req,res,next){
 							params: requestParams});
 });
 router.post('/Education-Experience',function(req,res,next){
-	FB.api(req.body['education-experience-id'],function(fb){
+	FB.api(req.body['education-experience-id'],{fields:['id',
+	'classes','concentration','degree','school','type','with','year'
+	]},function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Event 13 edge */
+/* Event 13 fields + edge */
 router.get('/Event',function(req,res,next){
 	var requestParams = require('./params/event');
 	res.render('facebook-api/paramForm',{title: 'Represents a Facebook event. The /{event-id} node returns a single event.',
@@ -511,7 +521,11 @@ router.post('/Event',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','can_guests_invite','cover','description',
+			'end_time','guest_list_enabled','is_canceled','is_page_owned',
+			'is_viewer_admin','name','owner','parent_group','start_time',
+			'ticket_uri','timezone','updated_time'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -525,7 +539,7 @@ router.post('/Event',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -541,11 +555,11 @@ router.post('/Friend-List',function(req,res,next){
 	FB.api(req.body['friend-list-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Group 10 edge */
+/* Group fields + 10 edge */
 router.get('/Group',function(req,res,next){
 	var requestParams = require('./params/group');
 	res.render('facebook-api/paramForm',{title: 'Represents a Facebook group. The /{group-id} node returns a single group.',
@@ -562,7 +576,10 @@ router.post('/Group',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','cover','description','email',
+			'icon','member_request_count','name','owner','parent',
+			'privacy','updated_time'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -576,7 +593,7 @@ router.post('/Group',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -591,7 +608,7 @@ router.post('/Group-Doc',function(req,res,next){
 	FB.api(req.body['group-doc-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -606,7 +623,7 @@ router.post('/Instagram-Comment',function(req,res,next){
 	FB.api(req.body['instagram-comment-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -641,7 +658,7 @@ router.post('/Instagram-User',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -676,7 +693,7 @@ router.post('/Life-Event',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -711,11 +728,11 @@ router.post('/Link',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
-/* Live-Video 4 edges */
+/* Live-Video fields + 4 edges */
 router.get('/Live-Video',function(req,res,next){
 	var requestParams = require('./params/liveVideo');
 	res.render('facebook-api/paramForm',{title: 'A live video',
@@ -732,7 +749,13 @@ router.post('/Live-Video',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','broadcast_start_time','creation_time',
+			'dash_preview_url','description','embed_html','from',
+			'is_manual_mode','is_reference_only','live_views',
+			'motion_detection_settings','permalink_url','planned_start_time',
+			'preview_url','seconds_left','secure_stream_url','status','stream_url',
+			'title','video'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -746,7 +769,7 @@ router.post('/Live-Video',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -761,7 +784,7 @@ router.post('/Mailing-Address',function(req,res,next){
 	FB.api(req.body['mailing-address-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -776,7 +799,7 @@ router.post('/Media-Fingerprint',function(req,res,next){
 	FB.api(req.body['media-fingerprint-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -811,7 +834,7 @@ router.post('/Message',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -846,7 +869,7 @@ router.post('/Milestone',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -881,7 +904,7 @@ router.post('/Native-Offer',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -896,7 +919,7 @@ router.post('/Notification',function(req,res,next){
 	FB.api(req.body['notification-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -911,7 +934,7 @@ router.post('/Open-Graph-Action-Type',function(req,res,next){
 	FB.api(req.body['open-graph-action-type-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -946,7 +969,7 @@ router.post('/Open-Graph-Context',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -961,11 +984,11 @@ router.post('/Open-Graph-Object-Type',function(req,res,next){
 	FB.api(req.body['open-graph-object-type-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Page 61 edeges */
+/* Page fields + 61 edeges */
 router.get('/Page',function(req,res,next){
 	var requestParams = require('./params/page');
 	res.render('facebook-api/paramForm',{title: 'SThis represents a Facebook Page. The /{page-id} node returns a single page.',
@@ -982,7 +1005,27 @@ router.post('/Page',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','about','access_token',
+			'affiliation','app_id','app_links','artists_we_like','attire',
+			'awards','band_interests','band_members','best_page','bio','birthday',
+			'booking_agent','built','can_checkin','can_post','category',
+			'category_list','checkins','company_overview','contact_address',
+			'country_page_likes','cover','culinary_team','current_location','description',
+			'description_html','directed_by','display_subtext','emails','features',
+			'food_styles','founded','general_info','general_manager','genre',
+			'global_brand_page_name','global_brand_root_id','has_added_app',
+			'hometown','hours','influences','is_community_page','is_permanently_closed',
+			'is_published','is_unclaimed','is_verified','link','location','members',
+			'mission','mpg','name','network','new_like_count',
+			'offer_eligible','overall_star_rating','parent_page','parking','payment_options',
+			'personal_info','personal_interests','pharma_safety_info','phone',
+			'place_type','plot_outline','press_contact','price_range',
+			'produced_by','products','public_transit','publisher_space','rating_count','record_label',
+			'release_date','restaurant_services','restaurant_specialties',
+			'schedule','screenplay_by','season','single_line_address','starring',
+			'store_number','studio','talking_about_count','unseen_message_count','username',
+			'website','were_here_count','written_by'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -996,7 +1039,7 @@ router.post('/Page',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1011,7 +1054,7 @@ router.post('/Page-Admin-Note',function(req,res,next){
 	FB.api(req.body['page-admin-note-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1026,7 +1069,7 @@ router.post('/Page-Call-To-Action',function(req,res,next){
 	FB.api(req.body['page-call-to-action-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1061,7 +1104,7 @@ router.post('/Page-Label',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1096,11 +1139,11 @@ router.post('/Payment',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
-/* Photo 7 edeges */
+/* Photo fields + 7 edeges */
 router.get('/Photo',function(req,res,next){
 	var requestParams = require('./params/photo');
 	res.render('facebook-api/paramForm',{title: 'Represents an individual photo on Facebook.',
@@ -1117,7 +1160,12 @@ router.post('/Photo',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','album','backdated_time','backdated_time_granularity',
+			'can_backdate','can_delete','can_tag','created_time',
+			'from','height','icon','images','link','name','name_tags',
+			'page_story_id','picture','place','target','updated_time',
+			'webp_images','width'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -1131,7 +1179,7 @@ router.post('/Photo',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1146,7 +1194,7 @@ router.post('/Place',function(req,res,next){
 	FB.api(req.body['place-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1161,11 +1209,11 @@ router.post('/Place-Tag',function(req,res,next){
 	FB.api(req.body['place-tag-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Place-Topic 0 edge */
+/* Place-Topic fields + 0 edge */
 router.get('/Place-Topic',function(req,res,next){
 	var requestParams = require('./params/placeTopic');
 	res.render('facebook-api/paramForm',{title: 'Reading a Place Topic',
@@ -1173,14 +1221,16 @@ router.get('/Place-Topic',function(req,res,next){
 							params: requestParams});
 });
 router.post('/Place-Topic',function(req,res,next){
-	FB.api(req.body['place-topic-id'],function(fb){
+	FB.api(req.body['place-topic-id'],{fields:['id','count',
+	'has_children','icon_url','name','parent_ids','plural_name',
+	'top_subtopic_names']},function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* Post 6 edeges */
+/* Post fields + 6 edeges */
 router.get('/Post',function(req,res,next){
 	var requestParams = require('./params/post');
 	res.render('facebook-api/paramForm',{title: 'An individual entry in a profile\'s feed. The profile could be a user, page, app, or group.',
@@ -1197,7 +1247,17 @@ router.post('/Post',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','application','call_to_action',
+			'caption','created_time','description','feed_targeting',
+			'age_max','age_min','cities','college_years','countries',
+			'education_statuses','genders','interested_in','interests',
+			'locales','regions','relationship_statuses','from','icon',
+			'instagram_eligibility','is_hidden','is_instagram_eligible',
+			'is_published','link','message','message_tags','name','object_id',
+			'parent_id','permalink_url','picture','place','privacy',
+			'properties','shares','source','status_type','story','story_tags',
+			'targeting','to','type','updated_time','with_tags'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -1211,7 +1271,7 @@ router.post('/Post',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1226,7 +1286,7 @@ router.post('/Promotion-Info',function(req,res,next){
 	FB.api(req.body['promotion-info-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1241,7 +1301,7 @@ router.post('/Request',function(req,res,next){
 	FB.api(req.body['request-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1276,7 +1336,7 @@ router.post('/Saved-Message-Response',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1313,7 +1373,7 @@ router.post('/Status',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1348,7 +1408,7 @@ router.post('/Test-User',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1365,11 +1425,11 @@ router.post('/Thread',function(req,res,next){
 	FB.api(req.body['thread-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
-/* User 56 edge */
+/* User fields + 56 edge */
 router.get('/User',function(req,res,next){
 	var requestParams = require('./params/user');
 	res.render('facebook-api/paramForm',{title: 'A user represents a person on Facebook. The /{user-id} node returns a single user.',
@@ -1386,7 +1446,16 @@ router.post('/User',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['id','about','age_range','birthday','context','cover',
+						'currency','education','email','favorite_athletes','favorite_teams','first_name','gender',
+						'hometown','inspirational_people','install_type','installed',
+						'interested_in','is_verified','languages','last_name','link',
+						'locale','location','meeting_for','middle_name','name','name_format',
+						'payment_pricepoints','political','public_key','quotes','relationship_status',
+						'religion','security_settings','significant_other','sports',
+						'test_group','third_party_id','timezone','updated_time',
+						'verified','video_upload_limits','viewer_can_send_gift','website','work'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -1400,11 +1469,11 @@ router.post('/User',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
-/* User- 4 edge */
+/* User-Context 4 edge */
 router.get('/User-Context',function(req,res,next){
 	var requestParams = require('./params/userContext');
 	res.render('facebook-api/paramForm',{title: 'Social context for a person.',
@@ -1435,11 +1504,11 @@ router.post('/User-Context',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
-/* Video 10 edges */
+/* Video fields + 10 edges */
 router.get('/Video',function(req,res,next){
 	var requestParams = require('./params/video');
 	res.render('facebook-api/paramForm',{title: 'Represents an individual video on Facebook.',
@@ -1456,7 +1525,12 @@ router.post('/Video',function(req,res,next){
 	} // find the node
 	for (key in req.body){
 		if (req.body[key] != 'on'){
-			var base = fbAddEdges(node,'').then(function(data){
+			var fields = ['backdated_time_granularity','created_time',
+			'description','embed_html','id','backdated_time','format',
+			'from','icon','is_instagram_eligible','length','permalink_url',
+			'picture','place','privacy','source','status','universal_video_id',
+			'updated_time'];
+			var base = fbNode(node,fields).then(function(data){
 				fbData.push(data); //store the returned fb instance
 			});
 			promises.push(base);
@@ -1470,7 +1544,7 @@ router.post('/Video',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
 });
 
@@ -1485,7 +1559,7 @@ router.post('/Video-Copyright',function(req,res,next){
 	FB.api(req.body['video-copyright-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1500,7 +1574,7 @@ router.post('/Video-Copyright-Rule',function(req,res,next){
 	FB.api(req.body['video-copyright-rule-id'],function(fb){
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(fb));
-		mongoStore(fb);
+		//mongoStore(fb);
 	});	
 });
 
@@ -1535,8 +1609,25 @@ router.post('/Video-List',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
+});
+
+/* Work-Experience fields + 0 edge */
+router.get('/Work-Experience',function(req,res,next){
+	var requestParams = require('./params/workExperience');
+	res.render('facebook-api/paramForm',{title: 'Information about a user\'s work',
+							url: '/facebook/Work-Experience',
+							params: requestParams});
+});
+router.post('/Work-Experience',function(req,res,next){
+	FB.api(req.body['work-experience-id'],{fields:['id',
+	'description','employer','end_date','from','location',
+	'position','projects','start_date','with']},function(fb){
+		res.setHeader('Content-Type','application/json');
+		res.send(JSON.stringify(fb));
+		//mongoStore(fb);
+	});	
 });
 
 /* SPECIAL Search 6 edges */
@@ -1565,23 +1656,8 @@ router.post('/SP-Search',function(req,res,next){
 	when.all(promises).then(function(){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(fbData));
-		mongoStore(fbData);
+		//mongoStore(fbData);
 	});
-});
-
-/* Work-Experience 0 edge */
-router.get('/Work-Experience',function(req,res,next){
-	var requestParams = require('./params/workExperience');
-	res.render('facebook-api/paramForm',{title: 'Information about a user\'s work',
-							url: '/facebook/Work-Experience',
-							params: requestParams});
-});
-router.post('/Work-Experience',function(req,res,next){
-	FB.api(req.body['work-experience-id'],function(fb){
-		res.setHeader('Content-Type','application/json');
-		res.send(JSON.stringify(fb));
-		mongoStore(fb);
-	});	
 });
 
 /* mongoDB store the data*/
@@ -1598,6 +1674,16 @@ var mongoStore = function(data){
 	});
 }
 
+/* query node with fields */
+var fbNode = function(base, fds){
+	var promise = new Promise((resolve,reject) => {
+		console.log(fds);
+		FB.api(base, {fields:fds}, function(fb){
+				resolve({key:base,value:fb});
+			});
+		});
+	return promise;
+}
 /* add edges using promise library */
 var fbAddEdges = function(base,edge){
 	var promise = new Promise((resolve,reject) => {
