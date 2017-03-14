@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+	h1.col-xs-8.col-xs-offset-2=title 
+
+	div.col-xs-8.col-xs-offset-2
+		form(action=url,id='selection-form',method='post')
+			TABLE(border='1',width="100%")
+				tbody
+					tr
+						td(width="50%")
+							label select a Starting point 
+							select(name="id" form="selection-form")
+								option("search") search
+								option(value="album") album
+								option(value="comment") comment
+								option(value="conversation") conversation
+								option(value="event") event
+								option(value="group") group
+								option(value="live-video") live-video
+								option(value="page") page
+								option(value="photo") photo
+								option(value="place") place
+								option(value="place-topic") place-topic
+								option(value="post") post
+								option(value="video") video
+								option("search") search
+						td(width="50%")
+							label retreive an End result 
+							select(name="id" form="selection-form")
+								option("search") search
+								option(value="album") album
+								option(value="comment") comment
+								option(value="conversation") conversation
+								option(value="event") event
+								option(value="group") group
+								option(value="live-video") live-video
+								option(value="page") page
+								option(value="photo") photo
+								option(value="place") place
+								option(value="place-topic") place-topic
+								option(value="post") post
+								option(value="video") video
+								option("search") search
+			button(type='submit', class='btn btn-info') Submit
