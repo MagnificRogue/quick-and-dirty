@@ -8,12 +8,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var facebookTestCalls = require('./routes/fbTest');
-
 var facebookApiCalls = require('./routes/facebook-api/routes');
 var twitterApiCalls = require('./routes/twitter-api/routes'); 
 var redditApiCalls = require('./routes/reddit-api/routes');
 var youtubeApiCalls = require('./routes/youtube-api/routes');
+
+/*--test---------------------------------*/
+var testCalls = require('./routes/test');
 
 var app = express();
 
@@ -30,11 +31,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/test',facebookTestCalls);
 app.use('/facebook',facebookApiCalls);
 app.use('/twitter', twitterApiCalls);
 app.use('/reddit',redditApiCalls);
 app.use('/youtube',youtubeApiCalls);
+
+/*--test---------------------------------*/
+app.use('/test',testCalls);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
