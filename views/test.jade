@@ -1,0 +1,38 @@
+extends ./layout
+
+block content
+	h1.col-xs-8.col-xs-offset-2=title 
+
+	div.col-xs-8.col-xs-offset-2='facebook'
+		form(action=url,id='facebook-form',method='post')
+			TABLE(border='1',width="100%")
+				tbody
+					tr
+						td(width="50%")
+							label select a Starting point 
+							select(name="fb" form="facebook-form")
+								each val in params['facebook']
+									option(value=val,label=val)
+						td(width="50%")
+							label retreive an End result 
+							select(name="fb" form="facebook-form").form-controls
+								each val in params['facebook'] 
+									option(value=val,label=val)
+			button(type='submit', class='btn btn-info') Submit
+			
+	div.col-xs-8.col-xs-offset-2='twitter'	
+		form(action=url,id='twitter-form',method='post')
+			TABLE(border='1',width="100%")
+				tbody
+					tr
+						td(width="50%")
+							label select a Starting point 
+							select(name="twt" form="twitter-form")
+								each val in params['twitter']
+									option(value=val,label=val)
+						td(width="50%")
+							label retreive an End result 
+							select(name="twt" form="twitter-form").form-controls
+								each val in params['twitter'] 
+									option(value=val,label=val)
+			button(type='submit', class='btn btn-info') Submit
