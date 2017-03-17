@@ -1,0 +1,25 @@
+{
+	"q": {
+		"type": "text",
+		"required": true,
+		"about": "The search query to run against people search.",
+		"example": "Twitter%20API"
+	},
+	"page":{
+		"type":"number",
+		"required":false,
+		"about":"Specifies the page of results to retrieve.",
+		"example":"3"
+	},
+	"count":{
+		"type":"number",
+		"required":false,
+		"about":"The number of potential user results to retrieve per page. This value has a maximum of 20.",
+		"example":"5"
+	},
+	"include_entities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The entities node will not be included in embedded Tweet objects when set to false."
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"lang":{
+		"type":"text",
+		"required":false,
+		"about":"Restricts the suggested categories to the requested language. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by the GET help / languages API request. Unsupported language codes will receive English (en) results. If you use lang in this request, ensure you also include it when requesting the GET users / suggestions / :slug list.",
+		"example":"en"
+	}
+}

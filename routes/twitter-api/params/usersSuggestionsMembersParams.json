@@ -1,0 +1,8 @@
+{
+	"slug":{
+		"type":"text",
+		"required":true,
+		"about":"The short name of list or a category",
+		"example":"twitter"
+	}
+}

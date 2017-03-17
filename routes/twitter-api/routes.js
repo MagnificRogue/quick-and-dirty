@@ -72,7 +72,7 @@ router.get('/account/settings',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -82,7 +82,7 @@ router.get('/help/configuration',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -92,7 +92,7 @@ router.get('/help/languages',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -102,7 +102,7 @@ router.get('/help/privacy',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -112,7 +112,7 @@ router.get('/help/tos',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -122,7 +122,7 @@ router.get('/saved_searches/list',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -132,7 +132,7 @@ router.get('/trends/available',function(req,res,next){
 			if(error) throw JSON.stringify(error);
 			res.setHeader('Content-Type','application/json');
 			res.send(JSON.stringify(tweets));
-			mongoStore(tweets);
+			//mongoStore(tweets);
 		});
 });
 
@@ -147,7 +147,7 @@ router.post('/account/verify_credentials',function(req,res,next){
 	twitterPost(req, 'account/verify_credentials').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -162,7 +162,7 @@ router.post('/application/rate_limit_status',function(req,res,next){
 	twitterPost(req, 'application/rate_limit_status').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -177,7 +177,7 @@ router.post('/blocks/ids',function(req,res,next){
 	twitterPost(req, 'blocks/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -192,7 +192,7 @@ router.post('/blocks/list',function(req,res,next){
 	twitterPost(req, 'blocks/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -207,7 +207,7 @@ router.post('/collections/entries',function(req,res,next){
 	twitterPost(req, 'collections/entries').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -222,7 +222,7 @@ router.post('/collections/list',function(req,res,next){
 	twitterPost(req, 'collections/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -237,7 +237,7 @@ router.post('/collections/show',function(req,res,next){
 	twitterPost(req, 'collections/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -252,7 +252,7 @@ router.post('/direct_messages',function(req,res,next){
 	twitterPost(req, 'direct_messages').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -267,7 +267,7 @@ router.post('/direct_messages/sent',function(req,res,next){
 	twitterPost(req, 'direct_messages/sent').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -282,7 +282,7 @@ router.post('/direct_messages/show',function(req,res,next){
 	twitterPost(req, 'direct_messages/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -297,7 +297,7 @@ router.post('/favorites/list',function(req,res,next){
 	twitterPost(req, 'favorites/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -312,7 +312,7 @@ router.post('/followers/ids',function(req,res,next){
 	twitterPost(req, 'followers/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -327,7 +327,7 @@ router.post('/followers/list',function(req,res,next){
 	twitterPost(req, 'followers/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -342,7 +342,7 @@ router.post('/friends/ids',function(req,res,next){
 	twitterPost(req, 'friends/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -357,7 +357,7 @@ router.post('/friends/list',function(req,res,next){
 	twitterPost(req, 'friends/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -372,7 +372,7 @@ router.post('/friendships/incoming',function(req,res,next){
 	twitterPost(req, 'friendships/incoming').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -387,7 +387,7 @@ router.post('/friendships/lookup',function(req,res,next){
 	twitterPost(req, 'friendships/lookup').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -402,7 +402,7 @@ router.post('/friendships/no_retweets/ids',function(req,res,next){
 	twitterPost(req, 'friendships/no_retweets/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -417,7 +417,7 @@ router.post('/friendships/outgoing',function(req,res,next){
 	twitterPost(req, 'friendships/outgoing').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -432,7 +432,7 @@ router.post('/friendships/show',function(req,res,next){
 	twitterPost(req, 'friendships/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -447,7 +447,7 @@ router.post('/geo/id/:place_id',function(req,res,next){
 	twitterPost(req, 'geo/id/:place_id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -462,7 +462,7 @@ router.post('/geo/reverse_geocode',function(req,res,next){
 	twitterPost(req, 'geo/reverse_geocode').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -480,7 +480,7 @@ router.post('/geo/search',function(req,res,next){
 	twitterPost(req, 'geo/search').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -495,7 +495,7 @@ router.post('/lists/list',function(req,res,next){
 	twitterPost(req, 'lists/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -510,7 +510,7 @@ router.post('/lists/members',function(req,res,next){
 	twitterPost(req, 'lists/members').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -525,7 +525,7 @@ router.post('/lists/members/show',function(req,res,next){
 	twitterPost(req, 'lists/members/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -540,7 +540,7 @@ router.post('/lists/memberships',function(req,res,next){
 	twitterPost(req, 'lists/memberships').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -555,7 +555,7 @@ router.post('/lists/ownerships',function(req,res,next){
 	twitterPost(req, 'lists/ownerships').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -570,7 +570,7 @@ router.post('/lists/show',function(req,res,next){
 	twitterPost(req, 'lists/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -585,7 +585,7 @@ router.post('/lists/statuses',function(req,res,next){
 	twitterPost(req, 'lists/statuses').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -600,7 +600,7 @@ router.post('/lists/subscribers',function(req,res,next){
 	twitterPost(req, 'lists/subscribers').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -615,7 +615,7 @@ router.post('/lists/subscribers/show',function(req,res,next){
 	twitterPost(req, 'lists/subscribers/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -630,7 +630,7 @@ router.post('/lists/subscriptions',function(req,res,next){
 	twitterPost(req, 'lists/subscriptions').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -645,7 +645,7 @@ router.post('/mutes/users/ids',function(req,res,next){
 	twitterPost(req, 'mutes/users/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -660,7 +660,7 @@ router.post('/mutes/users/list',function(req,res,next){
 	twitterPost(req, 'mutes/users/list').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -675,7 +675,7 @@ router.post('/saved_searches/show/:id',function(req,res,next){
 	twitterPost(req, 'saved_searches/show/:id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -690,7 +690,7 @@ router.post('/statuses/home_timeline',function(req,res,next){
 	twitterPost(req, 'statuses/home_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -705,7 +705,7 @@ router.post('/statuses/lookup',function(req,res,next){
 	twitterPost(req, 'statuses/lookup').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -720,7 +720,7 @@ router.post('/statuses/mentions_timeline',function(req,res,next){
 	twitterPost(req, 'statuses/mentions_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -735,7 +735,7 @@ router.post('/statuses/retweeters/ids',function(req,res,next){
 	twitterPost(req, 'statuses/retweeters/ids').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -750,7 +750,7 @@ router.post('/statuses/retweets/:id',function(req,res,next){
 	twitterPost(req, 'statuses/retweets/:id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -765,7 +765,7 @@ router.post('/statuses/retweets_of_me',function(req,res,next){
 	twitterPost(req, 'statuses/retweets_of_me').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -780,7 +780,7 @@ router.post('/statuses/show/:id',function(req,res,next){
 	twitterPost(req, 'statuses/show/:id').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -795,7 +795,7 @@ router.post('/statuses/user_timeline',function(req,res,next){
 	twitterPost(req, 'statuses/user_timeline').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -810,7 +810,7 @@ router.post('/trends/closest',function(req,res,next){
 	twitterPost(req, 'trends/closest').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -825,7 +825,7 @@ router.post('/trends/place',function(req,res,next){
 	twitterPost(req, 'trends/place').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -840,7 +840,7 @@ router.post('/users/lookup',function(req,res,next){
 	twitterPost(req, 'users/lookup').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -855,7 +855,7 @@ router.post('/users/profile_banner',function(req,res,next){
 	twitterPost(req, 'users/profile_banner').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -870,7 +870,7 @@ router.post('/users/search',function(req,res,next){
 	twitterPost(req, 'users/search').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -885,7 +885,7 @@ router.post('/users/show',function(req,res,next){
 	twitterPost(req, 'users/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -900,7 +900,7 @@ router.post('/users/suggestions',function(req,res,next){
 	twitterPost(req, 'users/suggestions').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -915,7 +915,7 @@ router.post('/users/suggestions/:slug',function(req,res,next){
 	twitterPost(req, 'users/suggestions/:slug').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 
@@ -930,7 +930,7 @@ router.post('/users/suggestions/:slug/members',function(req,res,next){
 	twitterPost(req, 'users/suggestions/:slug/members').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
-		mongoStore(tweets);
+		//mongoStore(tweets);
 	});	
 });
 

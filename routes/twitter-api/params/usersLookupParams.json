@@ -1,0 +1,19 @@
+{
+	"screen_name":{
+		"type":"text",
+		"required":false,
+		"about":"A comma separated list of screen names, up to 100 are allowed in a single request. You are strongly encouraged to use a POST for larger (up to 100 screen names) requests.",
+		"example":"twitterapi twitter"
+	},
+	"user_id":{
+		"type":"number",
+		"required":false,
+		"about":"A comma separated list of user IDs, up to 100 are allowed in a single request. You are strongly encouraged to use a POST for larger requests.",
+		"example":"783214 6253282"
+	},
+	"include_entities":{
+		"type":"checkbox",
+		"required":false,
+		"about":"The entities node that may appear within embedded statuses will not be included when set to false."
+	}
+}

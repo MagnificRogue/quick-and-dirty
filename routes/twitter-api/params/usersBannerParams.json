@@ -1,0 +1,14 @@
+{
+	"screen_name":{
+		"type":"text",
+		"required":false,
+		"about":"The screen name of the user for whom to return results. Helpful for disambiguating when a valid screen name is also a user ID.",
+		"example":"twitterapi twitter"
+	},
+	"user_id":{
+		"type":"number",
+		"required":false,
+		"about":"The ID of the user for whom to return results. Helpful for disambiguating when a valid user ID is also a valid screen name.",
+		"example":"783214 6253282"
+	}
+}
