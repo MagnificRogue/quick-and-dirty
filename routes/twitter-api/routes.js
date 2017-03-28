@@ -37,11 +37,11 @@ router.get('/', function(req, res, next) {
 												'twitter/lists/statuses',				'twitter/lists/subscribers',
 												'twitter/lists/subscribers/show',		'twitter/lists/subscriptions',
 												'twitter/mutes/users/ids',				'twitter/mutes/users/list',
-												'twitter/saved_searches/list',			'twitter/saved_searches/show/:id',
+												'twitter/saved_searches/list',			'twitter/saved_searches/show',
 												'twitter/statuses/home_timeline',		'twitter/statuses/lookup',
 												'twitter/statuses/mentions_timeline',	'twitter/statuses/retweeters/ids',
 												'twitter/statuses/retweets',		'twitter/statuses/retweets_of_me',
-												'twitter/statuses/show/:id',			'twitter/statuses/user_timeline',
+												'twitter/statuses/show',			'twitter/statuses/user_timeline',
 												'twitter/trends/available',				'twitter/trends/closest',
 												'twitter/trends/place',					'twitter/users/lookup',
 												'twitter/users/profile_banner',			'twitter/users/search',
@@ -664,15 +664,15 @@ router.post('/mutes/users/list',function(req,res,next){
 	});	
 });
 
-/* saved_searches/show/:id */
-router.get('/saved_searches/show/:id',function(req,res,next){
+/* saved_searches/show*/
+router.get('/saved_searches/show',function(req,res,next){
 	var requestParams = require('./params/savedSearchesIdParams');
 	res.render('twitter-api/paramForm',{title: 'Retrieve the information for the saved search represented by the given id.',
-										url: '/twitter/saved_searches/show/:id',
+										url: '/twitter/saved_searches/show',
 										params: requestParams});
 });
-router.post('/saved_searches/show/:id',function(req,res,next){
-	twitterPost(req, 'saved_searches/show/:id').then(function(tweets){
+router.post('/saved_searches/show',function(req,res,next){
+	twitterPost(req, 'saved_searches/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
 		//mongoStore(tweets);
@@ -769,15 +769,15 @@ router.post('/statuses/retweets_of_me',function(req,res,next){
 	});	
 });
 
-/* statuses/show/:id */
-router.get('/statuses/show/:id',function(req,res,next){
+/* statuses/show */
+router.get('/statuses/show',function(req,res,next){
 	var requestParams = require('./params/statusesShowParams');
 	res.render('twitter-api/paramForm',{title: 'Returns a single Tweet, specified by the id parameter. The Tweet’s author will also be embedded within the Tweet.',
-										url: '/twitter/statuses/show/:id',
+										url: '/twitter/statuses/show',
 										params: requestParams});
 });
-router.post('/statuses/show/:id',function(req,res,next){
-	twitterPost(req, 'statuses/show/:id').then(function(tweets){
+router.post('/statuses/show',function(req,res,next){
+	twitterPost(req, 'statuses/show').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
 		//mongoStore(tweets);
