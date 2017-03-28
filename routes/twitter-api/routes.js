@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 												'twitter/saved_searches/list',			'twitter/saved_searches/show/:id',
 												'twitter/statuses/home_timeline',		'twitter/statuses/lookup',
 												'twitter/statuses/mentions_timeline',	'twitter/statuses/retweeters/ids',
-												'twitter/statuses/retweets/:id',		'twitter/statuses/retweets_of_me',
+												'twitter/statuses/retweets',		'twitter/statuses/retweets_of_me',
 												'twitter/statuses/show/:id',			'twitter/statuses/user_timeline',
 												'twitter/trends/available',				'twitter/trends/closest',
 												'twitter/trends/place',					'twitter/users/lookup',
@@ -739,15 +739,15 @@ router.post('/statuses/retweeters/ids',function(req,res,next){
 	});	
 });
 
-/* statuses/retweets/:id */
-router.get('/statuses/retweets/:id',function(req,res,next){
+/* statuses/retweets */
+router.get('/statuses/retweets',function(req,res,next){
 	var requestParams = require('./params/statusesRtIdParams');
 	res.render('twitter-api/paramForm',{title: 'Returns a collection of the 100 most recent retweets of the Tweet specified by the id parameter.',
-										url: '/twitter/statuses/retweets/:id',
+										url: '/twitter/statuses/retweets',
 										params: requestParams});
 });
-router.post('/statuses/retweets/:id',function(req,res,next){
-	twitterPost(req, 'statuses/retweets/:id').then(function(tweets){
+router.post('/statuses/retweets',function(req,res,next){
+	twitterPost(req, 'statuses/retweets').then(function(tweets){
 		res.setHeader('Content-Type','application/json');
 		res.send(JSON.stringify(tweets));
 		//mongoStore(tweets);
